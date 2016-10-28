@@ -13,37 +13,42 @@
 
         <TextView
             android:id="@+id/btn_head"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorAccent" />
 
         <TextView
             android:id="@+id/btn_cloth"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorAccent" />
 
         <TextView
             android:id="@+id/btn_belt"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorAccent" />
 
         <TextView
             android:id="@+id/btn_arms"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorAccent" />
 
         <TextView
             android:id="@+id/btn_hidden_arms"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorAccent" />
     </LinearLayout>
 
     <LinearLayout
@@ -56,51 +61,58 @@
 
         <TextView
             android:id="@+id/btn_hand"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorAccent" />
 
         <TextView
             android:id="@+id/btn_pants"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
+            android:background="@color/colorAccent"
             android:layout_weight="1" />
 
         <TextView
             android:id="@+id/btn_shoe"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorAccent" />
 
         <TextView
             android:id="@+id/btn_necklace"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorAccent" />
 
         <TextView
             android:id="@+id/btn_trinketry"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorAccent" />
 
         <TextView
             android:id="@+id/btn_ring_1"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorAccent" />
 
         <TextView
             android:id="@+id/btn_ring_2"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorAccent" />
     </LinearLayout>
 
     <RelativeLayout

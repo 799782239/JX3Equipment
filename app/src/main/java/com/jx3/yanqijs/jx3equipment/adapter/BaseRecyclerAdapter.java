@@ -78,11 +78,14 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
         return mDatas.size();
     }
 
-    public BaseRecyclerAdapter(List<T> mDatas, Context context, RecyclerImp onRecyclerImp) {
-        if (this.mDatas == null) {
-            this.mDatas = new ArrayList<>();
-        }
-        this.mDatas.addAll(mDatas);
+    /**
+     * 构造方法不希望用户直接操作adapter中data数据,防止发生data被多个对象引用，要添加数据可通过{@link #add(Object),#addAll(List)}
+     *
+     * @param context
+     * @param onRecyclerImp
+     */
+    public BaseRecyclerAdapter(Context context, RecyclerImp onRecyclerImp) {
+        this.mDatas = new ArrayList<>();
         this.context = context;
         this.onRecyclerImp = onRecyclerImp;
     }
