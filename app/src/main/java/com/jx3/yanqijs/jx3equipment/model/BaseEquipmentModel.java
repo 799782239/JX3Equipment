@@ -12,6 +12,7 @@ public class BaseEquipmentModel {
     private double equipmentScore;//装备分数
     private String school;//职业
     private String stand;//突出的属性
+    private String from;//产出途径
 
 
 }

@@ -30,5 +30,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:25.0.0'
     compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.jakewharton:butterknife:5.1.1'
+    compile 'com.jakewharton:butterknife:8.4.0'
 }
