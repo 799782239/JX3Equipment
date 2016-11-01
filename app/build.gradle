@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.jx3.yanqijs.jx3equipment"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -16,6 +16,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    productFlavors {
     }
 }
 
@@ -27,4 +29,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.+'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:25.0.0'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.jakewharton:butterknife:5.1.1'
 }
