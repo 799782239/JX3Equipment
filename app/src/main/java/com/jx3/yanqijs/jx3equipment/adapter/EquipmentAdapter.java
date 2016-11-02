@@ -2,6 +2,7 @@ package com.jx3.yanqijs.jx3equipment.adapter;
 
 import android.content.Context;
 
+import com.jx3.yanqijs.jx3equipment.R;
 import com.jx3.yanqijs.jx3equipment.imp.RecyclerImp;
 import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
 
@@ -16,12 +17,15 @@ public class EquipmentAdapter extends BaseRecyclerAdapter<BaseEquipmentModel> {
 
     @Override
     public void init(BaseRecyclerHelper helper, int position, BaseEquipmentModel item) {
-
+        helper.setText(R.id.text_name, item.equipmentName);
+        helper.setText(R.id.text_stand, item.stand);
+        helper.setText(R.id.text_quality_rank, item.qualityRank + "");
+        helper.setText(R.id.from, item.from);
     }
 
     @Override
     protected int getLayoutID() {
-        return 0;
+        return R.layout.item_equipment_choose;
     }
 
     @Override

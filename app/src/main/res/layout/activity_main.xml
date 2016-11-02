@@ -71,8 +71,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
-            android:background="@color/colorAccent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:background="@color/colorAccent" />
 
         <TextView
             android:id="@+id/btn_shoe"
@@ -125,5 +125,20 @@
             android:id="@+id/attribute_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/choose_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_black"
+        android:visibility="gone">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/choose_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="40dp"
+            android:background="@drawable/recycler_round" />
     </RelativeLayout>
 </RelativeLayout>

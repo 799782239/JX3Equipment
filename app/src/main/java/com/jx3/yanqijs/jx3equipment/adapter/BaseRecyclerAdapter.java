@@ -41,7 +41,8 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
     public BaseRecyclerHelper onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case 0:
-                mViewHolder = new BaseRecyclerHelper(LayoutInflater.from(context).inflate(getLayoutID(), null), onRecyclerImp);
+                //注意item加载，要写parent，不然item最外层布局不生效
+                mViewHolder = new BaseRecyclerHelper(LayoutInflater.from(context).inflate(getLayoutID(), parent, false), onRecyclerImp);
                 break;
             case 1:
                 mViewHolder = new BaseRecyclerHelper(mFooter.get(0), onRecyclerImp);
@@ -127,13 +128,18 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
         notifyDataSetChanged();
     }
 
-
-    //-----------------------删除数据-----------------------
-    public void delete(int postion) {
-        this.mDatas.remove(postion);
+    //---------------------得到数据------------------------------
+    public T getData(int position) {
+        return this.mDatas.get(position);
     }
 
-    public void deleteAll() {
+
+    //-----------------------删除数据-----------------------
+    public void remove(int position) {
+        this.mDatas.remove(position);
+    }
+
+    public void removeAll() {
         this.mDatas.clear();
     }
 
