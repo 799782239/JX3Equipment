@@ -16,7 +16,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="@color/colorAccent" />
+            android:background="@color/colorAccent"
+            android:ellipsize="end" />
 
         <TextView
             android:id="@+id/btn_cloth"
@@ -24,7 +25,8 @@
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
             android:layout_weight="1"
-            android:background="@color/colorAccent" />
+            android:background="@color/colorAccent"
+            android:ellipsize="end" />
 
         <TextView
             android:id="@+id/btn_belt"
@@ -32,7 +34,8 @@
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
             android:layout_weight="1"
-            android:background="@color/colorAccent" />
+            android:background="@color/colorAccent"
+            android:ellipsize="end" />
 
         <TextView
             android:id="@+id/btn_arms"
@@ -40,7 +43,8 @@
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
             android:layout_weight="1"
-            android:background="@color/colorAccent" />
+            android:background="@color/colorAccent"
+            android:ellipsize="end" />
 
         <TextView
             android:id="@+id/btn_hidden_arms"
@@ -48,7 +52,8 @@
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
             android:layout_weight="1"
-            android:background="@color/colorAccent" />
+            android:background="@color/colorAccent"
+            android:ellipsize="end" />
     </LinearLayout>
 
     <LinearLayout
