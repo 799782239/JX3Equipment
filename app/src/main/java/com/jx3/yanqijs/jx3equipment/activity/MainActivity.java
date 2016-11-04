@@ -13,14 +13,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jx3.yanqijs.jx3equipment.R;
 import com.jx3.yanqijs.jx3equipment.adapter.EquipmentAdapter;
 import com.jx3.yanqijs.jx3equipment.data.InitChooseData;
+import com.jx3.yanqijs.jx3equipment.data.InitEquipmentData;
+import com.jx3.yanqijs.jx3equipment.data.ShowData;
 import com.jx3.yanqijs.jx3equipment.imp.RecyclerImp;
 import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
+import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -57,8 +64,25 @@ public class MainActivity extends BaseActivity {
         mEquipmentAdapter = new EquipmentAdapter(mContext, new RecyclerImp() {
             @Override
             public void OnItemClick(View view, int position) {
-                mEquipmentAdapter.getData(position);
+
                 closeChoose();
+                InitEquipmentData.getInstance().initData();
+//                InitEquipmentData.getInstance().getData();
+                GeneralEquipmentModel generalEquipmentModel = InitEquipmentData.getInstance().find(mEquipmentAdapter.getData(position).pId);
+
+//                Gson gson = new Gson();
+//                String temp;
+//                HashMap<String, GeneralEquipmentModel> ma = new HashMap<>();
+//                ma.put("map", generalEquipmentModel);
+//                temp = gson.toJson(ma);
+//                ShowData infoMap = gson.fromJson(temp, ShowData.class);
+//
+//                List<ShowData.DetailData> listValue = new ArrayList();
+//                Iterator it = infoMap.getMap().keySet().iterator();
+//                while (it.hasNext()) {
+//                    String key = it.next().toString();
+//                    ShowData.DetailData tempData=
+//                }
             }
         });
         chooseRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));

@@ -4,8 +4,12 @@ import com.google.gson.Gson;
 import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yanqijs on 2016/11/3.
@@ -13,6 +17,7 @@ import java.util.List;
 
 public class InitEquipmentData {
     private List<GeneralEquipmentModel> datas = new ArrayList<>();
+    HashMap<String, Object> map = new HashMap<String, Object>();
 
     private static InitEquipmentData initEquipmentData;
 
@@ -232,5 +237,20 @@ public class InitEquipmentData {
             }
         }
         return null;
+    }
+
+    public Map<String, Object> objectToMap(Object obj) throws Exception {
+        if (obj == null) {
+            return null;
+        }
+
+
+        Field[] declaredFields = obj.getClass().getDeclaredFields();
+        for (Field field : declaredFields) {
+            field.setAccessible(true);
+            map.put(field.getName(), field.get(obj));
+        }
+
+        return map;
     }
 }
