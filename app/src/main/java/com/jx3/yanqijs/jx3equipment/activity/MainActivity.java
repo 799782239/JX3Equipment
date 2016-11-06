@@ -23,11 +23,13 @@ import com.jx3.yanqijs.jx3equipment.imp.RecyclerImp;
 import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.PropertyPermission;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -70,19 +72,6 @@ public class MainActivity extends BaseActivity {
 //                InitEquipmentData.getInstance().getData();
                 GeneralEquipmentModel generalEquipmentModel = InitEquipmentData.getInstance().find(mEquipmentAdapter.getData(position).pId);
 
-//                Gson gson = new Gson();
-//                String temp;
-//                HashMap<String, GeneralEquipmentModel> ma = new HashMap<>();
-//                ma.put("map", generalEquipmentModel);
-//                temp = gson.toJson(ma);
-//                ShowData infoMap = gson.fromJson(temp, ShowData.class);
-//
-//                List<ShowData.DetailData> listValue = new ArrayList();
-//                Iterator it = infoMap.getMap().keySet().iterator();
-//                while (it.hasNext()) {
-//                    String key = it.next().toString();
-//                    ShowData.DetailData tempData=
-//                }
             }
         });
         chooseRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
@@ -150,4 +139,8 @@ public class MainActivity extends BaseActivity {
         return data;
 
     }
+    public void total(){
+
+    }
+
 }

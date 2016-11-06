@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by yanqijs on 2016/11/4.
  */
 
-public class GeneralEquipmentAdapter extends BaseRecyclerAdapter<ShowData.DetailData> {
+public class GeneralEquipmentAdapter extends BaseRecyclerAdapter<String> {
     /**
      * 构造方法不希望用户直接操作adapter中data数据,防止发生data被多个对象引用，要添加数据可通过{@link #add(Object),#addAll(List)}
      *
@@ -24,7 +24,8 @@ public class GeneralEquipmentAdapter extends BaseRecyclerAdapter<ShowData.Detail
     }
 
     @Override
-    public void init(BaseRecyclerHelper helper, int position, ShowData.DetailData item) {
+    public void init(BaseRecyclerHelper helper, int position, String item) {
+
     }
 
 

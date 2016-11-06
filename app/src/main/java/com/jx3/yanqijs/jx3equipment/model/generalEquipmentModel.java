@@ -26,7 +26,9 @@ public class GeneralEquipmentModel {
     public int wushuang = 0;//无双
     public int resistSpecial = 0;//御劲
     public int resistAttack = 0;//化劲
-    public String xiaohao = null;//消耗
+    public int weiwangxiaohao = 0;//威望消耗
+    public int banggongxiaohao = 0;//帮贡消耗
+    public int xiayixiaohao = 0;//侠义消耗
 
     public double getMoney() {
         return money;
@@ -132,11 +134,4 @@ public class GeneralEquipmentModel {
         this.resistAttack = resistAttack;
     }
 
-    public String getXiaohao() {
-        return xiaohao;
-    }
-
-    public void setXiaohao(String xiaohao) {
-        this.xiaohao = xiaohao;
-    }
 }
