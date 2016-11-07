@@ -52,7 +52,6 @@ public class InitEquipmentData {
         baseEquipmentModel.wushuang = 0;
         baseEquipmentModel.resistSpecial = 0;
         baseEquipmentModel.resistAttack = 45;
-        baseEquipmentModel.xiaohao = "威望|50400";
         datas.add(baseEquipmentModel);
         baseEquipmentModel = new GeneralEquipmentModel();
         baseEquipmentModel.pId = 100002;
@@ -76,7 +75,6 @@ public class InitEquipmentData {
         baseEquipmentModel.wushuang = 0;
         baseEquipmentModel.resistSpecial = 0;
         baseEquipmentModel.resistAttack = 45;
-        baseEquipmentModel.xiaohao = "威望|50400";
         datas.add(baseEquipmentModel);
         baseEquipmentModel = new GeneralEquipmentModel();
         baseEquipmentModel.pId = 100003;
@@ -100,7 +98,6 @@ public class InitEquipmentData {
         baseEquipmentModel.wushuang = 0;
         baseEquipmentModel.resistSpecial = 0;
         baseEquipmentModel.resistAttack = 45;
-        baseEquipmentModel.xiaohao = "威望|50400";
         datas.add(baseEquipmentModel);
         baseEquipmentModel = new GeneralEquipmentModel();
         baseEquipmentModel.pId = 100004;
@@ -124,7 +121,6 @@ public class InitEquipmentData {
         baseEquipmentModel.wushuang = 0;
         baseEquipmentModel.resistSpecial = 0;
         baseEquipmentModel.resistAttack = 45;
-        baseEquipmentModel.xiaohao = "威望|50400";
         datas.add(baseEquipmentModel);
         baseEquipmentModel = new GeneralEquipmentModel();
         baseEquipmentModel.pId = 100005;
@@ -148,7 +144,6 @@ public class InitEquipmentData {
         baseEquipmentModel.wushuang = 0;
         baseEquipmentModel.resistSpecial = 0;
         baseEquipmentModel.resistAttack = 45;
-        baseEquipmentModel.xiaohao = "威望|50400";
         datas.add(baseEquipmentModel);
         baseEquipmentModel = new GeneralEquipmentModel();
         baseEquipmentModel.pId = 100006;
@@ -172,7 +167,6 @@ public class InitEquipmentData {
         baseEquipmentModel.wushuang = 0;
         baseEquipmentModel.resistSpecial = 0;
         baseEquipmentModel.resistAttack = 45;
-        baseEquipmentModel.xiaohao = "威望|50400";
         datas.add(baseEquipmentModel);
         baseEquipmentModel = new GeneralEquipmentModel();
         baseEquipmentModel.pId = 100007;
@@ -196,7 +190,6 @@ public class InitEquipmentData {
         baseEquipmentModel.wushuang = 0;
         baseEquipmentModel.resistSpecial = 0;
         baseEquipmentModel.resistAttack = 45;
-        baseEquipmentModel.xiaohao = "威望|50400";
         datas.add(baseEquipmentModel);
         baseEquipmentModel = new GeneralEquipmentModel();
         baseEquipmentModel.pId = 100008;
@@ -220,7 +213,6 @@ public class InitEquipmentData {
         baseEquipmentModel.wushuang = 0;
         baseEquipmentModel.resistSpecial = 0;
         baseEquipmentModel.resistAttack = 45;
-        baseEquipmentModel.xiaohao = "威望|50400";
         datas.add(baseEquipmentModel);
         Gson gson = new Gson();
         return gson.toJson(datas);

@@ -30,6 +30,94 @@ public class GeneralEquipmentModel {
     public int banggongxiaohao = 0;//帮贡消耗
     public int xiayixiaohao = 0;//侠义消耗
 
+    public int getpId() {
+        return pId;
+    }
+
+    public void setpId(int pId) {
+        this.pId = pId;
+    }
+
+    public String getEquipmentName() {
+        return equipmentName;
+    }
+
+    public void setEquipmentName(String equipmentName) {
+        this.equipmentName = equipmentName;
+    }
+
+    public String getPart() {
+        return part;
+    }
+
+    public void setPart(String part) {
+        this.part = part;
+    }
+
+    public double getQualityRank() {
+        return qualityRank;
+    }
+
+    public void setQualityRank(double qualityRank) {
+        this.qualityRank = qualityRank;
+    }
+
+    public double getEquipmentScore() {
+        return equipmentScore;
+    }
+
+    public void setEquipmentScore(double equipmentScore) {
+        this.equipmentScore = equipmentScore;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getStand() {
+        return stand;
+    }
+
+    public void setStand(String stand) {
+        this.stand = stand;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public int getWeiwangxiaohao() {
+        return weiwangxiaohao;
+    }
+
+    public void setWeiwangxiaohao(int weiwangxiaohao) {
+        this.weiwangxiaohao = weiwangxiaohao;
+    }
+
+    public int getBanggongxiaohao() {
+        return banggongxiaohao;
+    }
+
+    public void setBanggongxiaohao(int banggongxiaohao) {
+        this.banggongxiaohao = banggongxiaohao;
+    }
+
+    public int getXiayixiaohao() {
+        return xiayixiaohao;
+    }
+
+    public void setXiayixiaohao(int xiayixiaohao) {
+        this.xiayixiaohao = xiayixiaohao;
+    }
+
     public double getMoney() {
         return money;
     }

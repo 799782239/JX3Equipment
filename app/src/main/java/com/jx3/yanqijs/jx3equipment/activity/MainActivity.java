@@ -12,24 +12,19 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jx3.yanqijs.jx3equipment.R;
 import com.jx3.yanqijs.jx3equipment.adapter.EquipmentAdapter;
+import com.jx3.yanqijs.jx3equipment.adapter.GeneralEquipmentAdapter;
 import com.jx3.yanqijs.jx3equipment.data.InitChooseData;
 import com.jx3.yanqijs.jx3equipment.data.InitEquipmentData;
-import com.jx3.yanqijs.jx3equipment.data.ShowData;
+import com.jx3.yanqijs.jx3equipment.data.ResultData;
 import com.jx3.yanqijs.jx3equipment.imp.RecyclerImp;
 import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
+import com.jx3.yanqijs.jx3equipment.model.ShowModel;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.PropertyPermission;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -45,21 +40,31 @@ public class MainActivity extends BaseActivity {
     RelativeLayout shadowRelativeLayout;
 
     private EquipmentAdapter mEquipmentAdapter;
+    private GeneralEquipmentAdapter mShowAdapter;
 
     private List<BaseEquipmentModel> data = new ArrayList<>();
     private List<BaseEquipmentModel> datas = new ArrayList<>();
+    private List<ShowModel> showData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initData();
         initChooseAdapter();
+        mShowAdapter = new GeneralEquipmentAdapter(mContext, new RecyclerImp() {
+            @Override
+            public void OnItemClick(View view, int position) {
+
+            }
+        });
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecyclerView.setAdapter(mShowAdapter);
 
     }
 
     private void initData() {
         InitChooseData.getInstance().initData();
-
+        InitEquipmentData.getInstance().initData();
     }
 
     private void initChooseAdapter() {
@@ -68,10 +73,15 @@ public class MainActivity extends BaseActivity {
             public void OnItemClick(View view, int position) {
 
                 closeChoose();
-                InitEquipmentData.getInstance().initData();
+
 //                InitEquipmentData.getInstance().getData();
                 GeneralEquipmentModel generalEquipmentModel = InitEquipmentData.getInstance().find(mEquipmentAdapter.getData(position).pId);
-
+                ResultData.getInstance().add(generalEquipmentModel);
+                ResultData.getInstance().calculateTotal();
+                showData.clear();
+                showData = ResultData.getInstance().toShow();
+                mShowAdapter.removeAll();
+                mShowAdapter.addAll(showData);
             }
         });
         chooseRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
@@ -97,6 +107,34 @@ public class MainActivity extends BaseActivity {
             case R.id.btn_head:
                 mEquipmentAdapter.removeAll();
                 mEquipmentAdapter.addAll(get("帽子"));
+                break;
+            case R.id.btn_cloth:
+                mEquipmentAdapter.removeAll();
+                mEquipmentAdapter.addAll(get("衣服"));
+                break;
+            case R.id.btn_arms:
+                mEquipmentAdapter.removeAll();
+                mEquipmentAdapter.addAll(get("武器"));
+                break;
+            case R.id.btn_belt:
+                mEquipmentAdapter.removeAll();
+                mEquipmentAdapter.addAll(get("腰带"));
+                break;
+            case R.id.btn_shoe:
+                mEquipmentAdapter.removeAll();
+                mEquipmentAdapter.addAll(get("鞋子"));
+                break;
+            case R.id.btn_hand:
+                mEquipmentAdapter.removeAll();
+                mEquipmentAdapter.addAll(get("护腕"));
+                break;
+            case R.id.btn_pants:
+                mEquipmentAdapter.removeAll();
+                mEquipmentAdapter.addAll(get("下装"));
+                break;
+            case R.id.btn_hidden_arms:
+                mEquipmentAdapter.removeAll();
+                mEquipmentAdapter.addAll(get("暗器"));
                 break;
             default:
                 view.setText("bbbbb");
@@ -139,8 +177,6 @@ public class MainActivity extends BaseActivity {
         return data;
 
     }
-    public void total(){
 
-    }
 
 }
