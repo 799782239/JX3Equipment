@@ -83,18 +83,28 @@ public class ResultData {
         showModels.clear();
         showModels.add(getShowModel("装备分数", mData.equipmentScore + ""));
         showModels.add(getShowModel("总价", mData.money + ""));
-        showModels.add(getShowModel("外功防御", mData.outDefense + ""));
-        showModels.add(getShowModel("内功防御", mData.innerDefense + ""));
+        double outDefense = mData.outDefense / (mData.outDefense + 1846.05);
+        showModels.add(getShowModel("外功防御", outDefense * 100 + ""));
+        double innerDefense = mData.innerDefense / (mData.innerDefense + 1846.05);
+        showModels.add(getShowModel("内功防御", innerDefense * 100 + ""));
         showModels.add(getShowModel("体质", mData.constitution + ""));
+        mData.attribute = mData.attribute + 32;
         showModels.add(getShowModel("职业特殊属性", mData.attribute + ""));
-        showModels.add(getShowModel("攻击", mData.attack + ""));
-        showModels.add(getShowModel("会心", mData.special + ""));
-        showModels.add(getShowModel("会心效果", mData.specialEffect + ""));
-        showModels.add(getShowModel("破防", mData.broken + ""));
-        showModels.add(getShowModel("命中", mData.hit + ""));
+        mData.attack = mData.attack + 324;
+        showModels.add(getShowModel("攻击", (mData.attack + mData.attribute * 1.55) + ""));
+        double special = mData.special / 41.4;
+        showModels.add(getShowModel("会心", (special + 0.22) * 100 + "%"));
+        double specialEffect = mData.specialEffect / 15;
+        showModels.add(getShowModel("会心效果", (specialEffect + 175.27) + "%"));
+        double broken = (mData.broken + mData.attribute * 0.19) / 36.2;
+        showModels.add(getShowModel("破防", broken * 100 + "%"));
+        double hit = mData.hit / 34.2;
+        showModels.add(getShowModel("命中", (hit + 92.07) + "%"));
         showModels.add(getShowModel("无双", mData.wushuang + ""));
-        showModels.add(getShowModel("御劲", mData.resistSpecial + ""));
-        showModels.add(getShowModel("化劲", mData.resistAttack + ""));
+        double resistSpecial = mData.resistSpecial / 41.4;
+        showModels.add(getShowModel("御劲", resistSpecial * 100 + "%"));
+        double resistAttack = mData.resistAttack / (mData.resistAttack + 732.375);
+        showModels.add(getShowModel("化劲", resistAttack * 100 + "%"));
         return showModels;
 
     }
