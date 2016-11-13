@@ -20,6 +20,7 @@ import java.beans.*;
 public class ResultData {
     private static ResultData resultData;
 
+
     private GeneralEquipmentModel mData = new GeneralEquipmentModel();
     private List<GeneralEquipmentModel> mDatas = new ArrayList<>();
     private List<ShowModel> showModels = new ArrayList<>();
@@ -83,14 +84,15 @@ public class ResultData {
         showModels.clear();
         showModels.add(getShowModel("装备分数", mData.equipmentScore + ""));
         showModels.add(getShowModel("总价", mData.money + ""));
+        mData.outDefense += 30;
         double outDefense = mData.outDefense / (mData.outDefense + 1846.05);
         showModels.add(getShowModel("外功防御", outDefense * 100 + ""));
         double innerDefense = mData.innerDefense / (mData.innerDefense + 1846.05);
         showModels.add(getShowModel("内功防御", innerDefense * 100 + ""));
         showModels.add(getShowModel("体质", mData.constitution + ""));
-        mData.attribute = mData.attribute + 32;
+        mData.attribute += 32;
         showModels.add(getShowModel("职业特殊属性", mData.attribute + ""));
-        mData.attack = mData.attack + 324;
+        mData.attack += 320;
         showModels.add(getShowModel("攻击", (mData.attack + mData.attribute * 1.55) + ""));
         double special = mData.special / 41.4;
         showModels.add(getShowModel("会心", (special + 0.22) * 100 + "%"));
@@ -103,6 +105,9 @@ public class ResultData {
         showModels.add(getShowModel("无双", mData.wushuang + ""));
         double resistSpecial = mData.resistSpecial / 41.4;
         showModels.add(getShowModel("御劲", resistSpecial * 100 + "%"));
+        if (true) {
+            mData.resistAttack = mData.resistAttack + 244;
+        }//判断是否需要为T职业，T职业无初始化劲
         double resistAttack = mData.resistAttack / (mData.resistAttack + 732.375);
         showModels.add(getShowModel("化劲", resistAttack * 100 + "%"));
         return showModels;
