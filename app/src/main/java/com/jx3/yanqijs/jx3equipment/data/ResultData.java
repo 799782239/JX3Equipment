@@ -93,12 +93,13 @@ public class ResultData {
         mData.attribute += 32;
         showModels.add(getShowModel("职业特殊属性", mData.attribute + ""));
         mData.attack += 320;
-        showModels.add(getShowModel("攻击", (mData.attack + mData.attribute * 1.55) + ""));
-        double special = mData.special / 41.4;
+        showModels.add(getShowModel("攻击", (mData.attack + mData.attribute * 1.55 + mData.attribute * 0.15) + ""));
+        double special = mData.special / 4143.925;
         showModels.add(getShowModel("会心", (special + 0.22) * 100 + "%"));
-        double specialEffect = mData.specialEffect / 15;
-        showModels.add(getShowModel("会心效果", (specialEffect + 175.27) + "%"));
-        double broken = (mData.broken + mData.attribute * 0.19) / 36.2;
+        double specialEffect = mData.specialEffect / 1506.6;
+        showModels.add(getShowModel("会心效果", (specialEffect + 1.7527) * 100 + "%"));
+        double broken = (mData.broken + mData.attribute * 0.19 + mData.attribute * 0.25);
+        broken = broken / 3616.925;
         showModels.add(getShowModel("破防", broken * 100 + "%"));
         double hit = mData.hit / 34.2;
         showModels.add(getShowModel("命中", (hit + 92.07) + "%"));
