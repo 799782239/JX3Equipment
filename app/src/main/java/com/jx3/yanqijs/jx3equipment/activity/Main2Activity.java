@@ -5,21 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.jx3.yanqijs.jx3equipment.R;
 import com.jx3.yanqijs.jx3equipment.Operate;
+import com.jx3.yanqijs.jx3equipment.R;
 import com.jx3.yanqijs.jx3equipment.model.M;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Scheduler;
 import rx.Subscriber;
-import rx.android.MainThreadSubscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
