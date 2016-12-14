@@ -27,8 +27,8 @@ public class BaseOperate {
         return mBaseOperate;
     }
 
-    public Object getOperate(Class<Operate> object) {
-        Class<Object> operate = mRetrofit.create((object);
+    public Operate getOperate(Class<Operate> object) {
+        Operate operate = mRetrofit.create(object);
         return operate;
     }
 

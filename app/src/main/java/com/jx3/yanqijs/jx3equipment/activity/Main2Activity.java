@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.jx3.yanqijs.jx3equipment.Operate;
 import com.jx3.yanqijs.jx3equipment.R;
 import com.jx3.yanqijs.jx3equipment.model.M;
+import com.jx3.yanqijs.jx3equipment.rxevent.ObservableData;
 
 import java.util.List;
 
@@ -27,17 +28,36 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         textView = (TextView) findViewById(R.id.text);
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://p.3.cn/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build();
-        final Operate operate = retrofit.create(Operate.class);
-//        <List<M>> call = operate.getTest("J_3133811", "1");
-        operate.getTest("J_3133811", "1")
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("http://p.3.cn/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//                .build();
+//        final Operate operate = retrofit.create(Operate.class);
+//        operate.getTest("J_3133811", "1")
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<List<M>>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        Log.i("main", "complete");
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Log.i("main", "error:" + e.toString());
+//                    }
+//
+//                    @Override
+//                    public void onNext(List<M> ms) {
+//                        Log.i("main", "next");
+//                        textView.setText(ms.get(0).getId());
+//                    }
+//                });
+        ObservableData.getInstance().getJdId("J_3133811", "1")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<M>>() {
+                .subscribe(new Subscriber<M>() {
                     @Override
                     public void onCompleted() {
                         Log.i("main", "complete");
@@ -45,25 +65,13 @@ public class Main2Activity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.i("main", "error:" + e.toString());
+
                     }
 
                     @Override
-                    public void onNext(List<M> ms) {
-                        Log.i("main", "next");
-                        textView.setText(ms.get(0).getId());
+                    public void onNext(M m) {
+                        textView.setText(m.getId());
                     }
                 });
-//        call.enqueue(new Callback<List<M>>() {
-//            @Override
-//            public void onResponse(Call<List<M>> call, Response<List<M>> response) {
-//                textView.setText(response.body().get(0).getId());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<M>> call, Throwable t) {
-//                textView.setText(t.getMessage());
-//            }
-//        });
     }
 }
