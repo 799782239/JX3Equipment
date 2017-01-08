@@ -1,5 +1,10 @@
 package com.jx3.yanqijs.jx3equipment;
 
+import java.io.IOException;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -17,7 +22,9 @@ public class BaseOperate {
                 .build();
     }
 
+
     private static BaseOperate mBaseOperate;
+
     private Retrofit mRetrofit;
 
     public static BaseOperate getInstance() {
@@ -27,9 +34,16 @@ public class BaseOperate {
         return mBaseOperate;
     }
 
-    public Operate getOperate(Class<Operate> object) {
-        Operate operate = mRetrofit.create(object);
-        return operate;
+    public BaseOperateImp getOperate(Class<BaseOperateImp> object) {
+        BaseOperateImp baseOperateImp = mRetrofit.create(object);
+        return baseOperateImp;
     }
 
+    class LoggingInterceptor implements Interceptor {
+
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            return null;
+        }
+    }
 }

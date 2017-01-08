@@ -1,4 +1,4 @@
-package com.jx3.yanqijs.jx3equipment;
+package com.jx3.yanqijs.jx3equipment.utils;
 
 import android.util.Log;
 

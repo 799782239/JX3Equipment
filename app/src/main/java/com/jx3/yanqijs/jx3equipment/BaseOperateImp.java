@@ -13,7 +13,7 @@ import rx.Observable;
  * Created by yanqijs on 2016/11/16.
  */
 
-public interface Operate {
+public interface BaseOperateImp {
     @GET("prices/mgets")
     Observable<List<M>> getTest(@Query("skuIds") String sk, @Query("type") String type);
 }

@@ -1,8 +1,7 @@
 package com.jx3.yanqijs.jx3equipment.rxevent;
 
 import com.jx3.yanqijs.jx3equipment.BaseOperate;
-import com.jx3.yanqijs.jx3equipment.Operate;
-import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
+import com.jx3.yanqijs.jx3equipment.BaseOperateImp;
 import com.jx3.yanqijs.jx3equipment.model.M;
 
 import java.util.List;
@@ -27,8 +26,8 @@ public class ObservableData implements ObservableContract {
 
     @Override
     public Observable<M> getJdId(String id, String type) {
-        Operate operate = BaseOperate.getInstance().getOperate(Operate.class);
-        return operate.getTest(id, type).flatMap(new Func1<List<M>, Observable<M>>() {
+        BaseOperateImp baseOperateImp = BaseOperate.getInstance().getOperate(BaseOperateImp.class);
+        return baseOperateImp.getTest(id, type).flatMap(new Func1<List<M>, Observable<M>>() {
             @Override
             public Observable<M> call(List<M> ms) {
                 return Observable.from(ms);
