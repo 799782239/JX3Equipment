@@ -1,9 +1,13 @@
 package com.jx3.yanqijs.jx3equipment;
 
+import android.util.Log;
+
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -15,8 +19,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BaseOperate {
     public BaseOperate() {
+        LoggingInterceptor interceptor = new LoggingInterceptor();
+//        interceptor.setLevel(LoggingInterceptor.Level.BODY);
+        mOkHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .retryOnConnectionFailure(true)
+                .connectTimeout(15, TimeUnit.SECONDS)
+//                .addNetworkInterceptor(authorizationInterceptor)
+                .build();
         mRetrofit = new Retrofit.Builder()
                 .baseUrl("http://p.3.cn/")
+                .client(mOkHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
@@ -26,6 +39,7 @@ public class BaseOperate {
     private static BaseOperate mBaseOperate;
 
     private Retrofit mRetrofit;
+    private OkHttpClient mOkHttpClient;
 
     public static BaseOperate getInstance() {
         if (mBaseOperate == null) {
@@ -43,7 +57,13 @@ public class BaseOperate {
 
         @Override
         public Response intercept(Chain chain) throws IOException {
-            return null;
+            Request request = chain.request();
+            Log.i("BaseOperate", "BaseOperate:" + request.url() + "");
+//            chain.connection();
+            Response response = chain.proceed(request);
+//            response.isSuccessful();
+//            response.isRedirect();
+            return response;
         }
     }
 }
