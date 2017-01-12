@@ -60,9 +60,16 @@ public class BaseOperate {
             Request request = chain.request();
             Log.i("BaseOperate", "BaseOperate:" + request.url() + "");
 //            chain.connection();
+//            Request.Builder requestBuilder = originalRequest.newBuilder()
+//                    //Basic Authentication,也可用于token验证,OAuth验证
+//                    .header("Authorization", basic)
+//                    .header("Accept", "application/json")
+//                    .method(originalRequest.method(), originalRequest.body());
             Response response = chain.proceed(request);
-//            response.isSuccessful();
-//            response.isRedirect();
+//设置缓存
+//            Response.Builder responseBuilder =
+//                    //Cache control设置缓存
+//                    originalResponse.newBuilder().header("Cache-Control", cacheControl);
             return response;
         }
     }
