@@ -64,7 +64,7 @@ public class Main2Activity extends AppCompatActivity {
 
                     @Override
                     public void onNext(M m) {
-                        textView.setText(m.getId());
+                        textView.setText(m.id);
                     }
                 });
     }

@@ -27,11 +27,12 @@ public class ObservableData implements ObservableContract {
     @Override
     public Observable<M> getJdId(String id, String type) {
         BaseOperateImp baseOperateImp = BaseOperate.getInstance().getOperate(BaseOperateImp.class);
-        return baseOperateImp.getTest(id, type).flatMap(new Func1<List<M>, Observable<M>>() {
-            @Override
-            public Observable<M> call(List<M> ms) {
-                return Observable.from(ms);
-            }
-        });
+        return baseOperateImp.getTest(id, type);
+//                .flatMap(new Func1<List<M>, Observable<M>>() {
+//            @Override
+//            public Observable<M> call(List<M> ms) {
+//                return Observable.from(ms);
+//            }
+//        });
     }
 }

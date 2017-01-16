@@ -28,7 +28,7 @@ public class BaseOperate {
 //                .addNetworkInterceptor(authorizationInterceptor)
                 .build();
         mRetrofit = new Retrofit.Builder()
-                .baseUrl("http://p.3.cn/")
+                .baseUrl("http://192.168.134.58:63343/")
                 .client(mOkHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -60,6 +60,7 @@ public class BaseOperate {
             Request request = chain.request();
             Log.i("BaseOperate", "BaseOperate:" + request.url() + "");
 //            chain.connection();
+            //加验证头
 //            Request.Builder requestBuilder = originalRequest.newBuilder()
 //                    //Basic Authentication,也可用于token验证,OAuth验证
 //                    .header("Authorization", basic)
