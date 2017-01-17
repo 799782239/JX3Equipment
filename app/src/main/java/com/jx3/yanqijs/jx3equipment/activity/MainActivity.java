@@ -22,12 +22,18 @@ import com.jx3.yanqijs.jx3equipment.imp.RecyclerImp;
 import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.ShowModel;
+import com.jx3.yanqijs.jx3equipment.rxevent.ShowResultEvent;
+import com.jx3.yanqijs.jx3equipment.utils.RxBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.btn_head)
@@ -71,17 +77,16 @@ public class MainActivity extends BaseActivity {
         mEquipmentAdapter = new EquipmentAdapter(mContext, new RecyclerImp() {
             @Override
             public void OnItemClick(View view, int position) {
-
                 closeChoose();
-
 //                InitEquipmentData.getInstance().getData();
                 GeneralEquipmentModel generalEquipmentModel = InitEquipmentData.getInstance().find(mEquipmentAdapter.getData(position).pId);
                 ResultData.getInstance().add(generalEquipmentModel);
                 ResultData.getInstance().calculateTotal();
                 showData.clear();
-                showData = ResultData.getInstance().toShow();
-                mShowAdapter.removeAll();
-                mShowAdapter.addAll(showData);
+//                showData = ResultData.getInstance().toShow();
+//                mShowAdapter.removeAll();
+//                mShowAdapter.addAll(showData);
+                RxBus.getInstance().post(new ShowResultEvent(ResultData.getInstance().toShow()));
             }
         });
         chooseRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
@@ -178,5 +183,20 @@ public class MainActivity extends BaseActivity {
 
     }
 
-
+    @Override
+    protected Subscription subscribeEvents() {
+        return RxBus.getInstance().toObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(new Action1<Object>() {
+                    @Override
+                    public void call(Object o) {
+                        if (o instanceof ShowResultEvent) {
+                            mShowAdapter.removeAll();
+                            mShowAdapter.addAll(((ShowResultEvent) o).result);
+                        }
+                    }
+                })
+                .subscribe(RxBus.defaultSubscriber());
+    }
 }
