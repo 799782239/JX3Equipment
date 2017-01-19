@@ -2,9 +2,11 @@ package com.jx3.yanqijs.jx3equipment;
 
 import android.util.Log;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -33,6 +35,11 @@ public class BaseOperate {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
+    }
+
+    private Cache cache() {
+        final File baseDir = BaseApplication.getInstance().getExternalCacheDir();
+        return new Cache(baseDir, 10 * 1024 * 1024);
     }
 
 

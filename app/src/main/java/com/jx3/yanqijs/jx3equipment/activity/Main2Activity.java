@@ -4,50 +4,28 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jx3.yanqijs.jx3equipment.R;
 import com.jx3.yanqijs.jx3equipment.model.M;
 import com.jx3.yanqijs.jx3equipment.rxevent.ObservableData;
+import com.jx3.yanqijs.jx3equipment.rxevent.ShowResultEvent;
+import com.jx3.yanqijs.jx3equipment.utils.RxBus;
 
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-public class Main2Activity extends AppCompatActivity {
+public class Main2Activity extends BaseActivity {
     private TextView textView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
         textView = (TextView) findViewById(R.id.text);
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://p.3.cn/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-//                .build();
-//        final Operate operate = retrofit.create(Operate.class);
-//        operate.getTest("J_3133811", "1")
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<List<M>>() {
-//                    @Override
-//                    public void onCompleted() {
-//                        Log.i("main", "complete");
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        Log.i("main", "error:" + e.toString());
-//                    }
-//
-//                    @Override
-//                    public void onNext(List<M> ms) {
-//                        Log.i("main", "next");
-//                        textView.setText(ms.get(0).getId());
-//                    }
-//                });
         ObservableData.getInstance().getJdId("J_3133811", "1")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -68,4 +46,10 @@ public class Main2Activity extends AppCompatActivity {
                     }
                 });
     }
+
+    @Override
+    public int LayoutId() {
+        return R.layout.activity_main2;
+    }
+
 }

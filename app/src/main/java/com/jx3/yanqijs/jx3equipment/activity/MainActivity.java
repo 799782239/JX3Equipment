@@ -78,14 +78,10 @@ public class MainActivity extends BaseActivity {
             @Override
             public void OnItemClick(View view, int position) {
                 closeChoose();
-//                InitEquipmentData.getInstance().getData();
                 GeneralEquipmentModel generalEquipmentModel = InitEquipmentData.getInstance().find(mEquipmentAdapter.getData(position).pId);
                 ResultData.getInstance().add(generalEquipmentModel);
                 ResultData.getInstance().calculateTotal();
                 showData.clear();
-//                showData = ResultData.getInstance().toShow();
-//                mShowAdapter.removeAll();
-//                mShowAdapter.addAll(showData);
                 RxBus.getInstance().post(new ShowResultEvent(ResultData.getInstance().toShow()));
             }
         });
