@@ -30,7 +30,7 @@ public class BaseOperate {
 //                .addNetworkInterceptor(authorizationInterceptor)
                 .build();
         mRetrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.134.58:63343/")
+                .baseUrl("http://192.168.191.1/")
                 .client(mOkHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())

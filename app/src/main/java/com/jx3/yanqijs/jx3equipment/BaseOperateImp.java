@@ -14,6 +14,6 @@ import rx.Observable;
  */
 
 public interface BaseOperateImp {
-    @GET("test/asd.php")
+    @GET("phptest/asd.php")
     Observable<M> getTest(@Query("skuIds") String sk, @Query("type") String type);
 }
