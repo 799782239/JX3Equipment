@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jx3.yanqijs.jx3equipment.BaseOperate;
 import com.jx3.yanqijs.jx3equipment.R;
 import com.jx3.yanqijs.jx3equipment.adapter.EquipmentAdapter;
 import com.jx3.yanqijs.jx3equipment.adapter.GeneralEquipmentAdapter;
@@ -21,7 +23,9 @@ import com.jx3.yanqijs.jx3equipment.data.ResultData;
 import com.jx3.yanqijs.jx3equipment.imp.RecyclerImp;
 import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
+import com.jx3.yanqijs.jx3equipment.model.M;
 import com.jx3.yanqijs.jx3equipment.model.ShowModel;
+import com.jx3.yanqijs.jx3equipment.rxevent.ObservableData;
 import com.jx3.yanqijs.jx3equipment.rxevent.ShowResultEvent;
 import com.jx3.yanqijs.jx3equipment.utils.RxBus;
 
@@ -30,6 +34,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -107,7 +112,27 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btn_head:
                 mEquipmentAdapter.removeAll();
-                mEquipmentAdapter.addAll(get("帽子"));
+//                mEquipmentAdapter.addAll(get("帽子"));
+                ObservableData.getInstance().getListData("arm", "11", "30")
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<BaseEquipmentModel>() {
+                            @Override
+                            public void onCompleted() {
+                                Log.i("main", "complete");
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                Log.i("BaseOperate", e.toString());
+
+                            }
+
+                            @Override
+                            public void onNext(BaseEquipmentModel baseEquipmentModel) {
+                                mEquipmentAdapter.add(baseEquipmentModel);
+                            }
+                        });
                 break;
             case R.id.btn_cloth:
                 mEquipmentAdapter.removeAll();

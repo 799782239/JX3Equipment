@@ -2,6 +2,7 @@ package com.jx3.yanqijs.jx3equipment.rxevent;
 
 import com.jx3.yanqijs.jx3equipment.BaseOperate;
 import com.jx3.yanqijs.jx3equipment.BaseOperateImp;
+import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.M;
 
 import java.util.List;
@@ -34,5 +35,10 @@ public class ObservableData implements ObservableContract {
 //                return Observable.from(ms);
 //            }
 //        });
+    }
+
+    @Override
+    public Observable<BaseEquipmentModel> getListData(String part, String min, String max) {
+        return BaseOperate.getInstance().getOperate(BaseOperateImp.class).getListData(part, min, max);
     }
 }

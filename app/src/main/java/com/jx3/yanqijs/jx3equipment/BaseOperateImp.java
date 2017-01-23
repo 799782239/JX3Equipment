@@ -1,5 +1,6 @@
 package com.jx3.yanqijs.jx3equipment;
 
+import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.M;
 
 import java.util.List;
@@ -16,4 +17,7 @@ import rx.Observable;
 public interface BaseOperateImp {
     @GET("phptest/asd.php")
     Observable<M> getTest(@Query("skuIds") String sk, @Query("type") String type);
+
+    @GET("phptest/EquipmentList.php")
+    Observable<BaseEquipmentModel> getListData(@Query("part") String part, @Query("min") String min, @Query("max") String max);
 }
