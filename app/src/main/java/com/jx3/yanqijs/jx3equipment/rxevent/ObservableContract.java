@@ -1,7 +1,6 @@
 package com.jx3.yanqijs.jx3equipment.rxevent;
 
-import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
-import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
+import com.jx3.yanqijs.jx3equipment.model.BaseArrayOperateModel;
 import com.jx3.yanqijs.jx3equipment.model.M;
 
 import rx.Observable;
@@ -14,5 +13,5 @@ public interface ObservableContract {
     //    Observable<GeneralEquipmentModel> getEquipment(int id);
     Observable<M> getJdId(String id, String type);
 
-    Observable<BaseEquipmentModel> getListData(String part, String min, String max);
+    Observable<BaseArrayOperateModel> getListData(String part, String min, String max);
 }

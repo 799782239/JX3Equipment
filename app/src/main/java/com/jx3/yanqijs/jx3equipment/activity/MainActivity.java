@@ -8,12 +8,12 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.jx3.yanqijs.jx3equipment.BaseOperate;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jx3.yanqijs.jx3equipment.R;
 import com.jx3.yanqijs.jx3equipment.adapter.EquipmentAdapter;
 import com.jx3.yanqijs.jx3equipment.adapter.GeneralEquipmentAdapter;
@@ -22,8 +22,8 @@ import com.jx3.yanqijs.jx3equipment.data.InitEquipmentData;
 import com.jx3.yanqijs.jx3equipment.data.ResultData;
 import com.jx3.yanqijs.jx3equipment.imp.RecyclerImp;
 import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
+import com.jx3.yanqijs.jx3equipment.model.BaseArrayOperateModel;
 import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
-import com.jx3.yanqijs.jx3equipment.model.M;
 import com.jx3.yanqijs.jx3equipment.model.ShowModel;
 import com.jx3.yanqijs.jx3equipment.rxevent.ObservableData;
 import com.jx3.yanqijs.jx3equipment.rxevent.ShowResultEvent;
@@ -34,7 +34,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -116,21 +115,18 @@ public class MainActivity extends BaseActivity {
                 ObservableData.getInstance().getListData("arm", "11", "30")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<BaseEquipmentModel>() {
+                        .subscribe(new ObservableData.DefaultSub(mContext) {
                             @Override
-                            public void onCompleted() {
-                                Log.i("main", "complete");
+                            public void onStart() {
+                                super.onStart();
                             }
 
                             @Override
-                            public void onError(Throwable e) {
-                                Log.i("BaseOperate", e.toString());
-
-                            }
-
-                            @Override
-                            public void onNext(BaseEquipmentModel baseEquipmentModel) {
-                                mEquipmentAdapter.add(baseEquipmentModel);
+                            public void onNext(BaseArrayOperateModel obj) {
+                                super.onNext(obj);
+                                List<BaseEquipmentModel> baseEquipmentModels = new Gson().fromJson(mObj.toString(), new TypeToken<List<BaseEquipmentModel>>() {
+                                }.getType());
+                                mEquipmentAdapter.addAll(baseEquipmentModels);
                             }
                         });
                 break;

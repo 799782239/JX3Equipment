@@ -1,6 +1,8 @@
-package com.jx3.yanqijs.jx3equipment;
+package com.jx3.yanqijs.jx3equipment.operate;
 
 import android.util.Log;
+
+import com.jx3.yanqijs.jx3equipment.BaseApplication;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,13 +22,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class BaseOperate {
+    private final static String TAG = "BaseOperate";
+    private int connectTime = 30;
+
     public BaseOperate() {
         LoggingInterceptor interceptor = new LoggingInterceptor();
 //        interceptor.setLevel(LoggingInterceptor.Level.BODY);
         mOkHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .retryOnConnectionFailure(true)
-                .connectTimeout(15, TimeUnit.SECONDS)
+                .connectTimeout(connectTime, TimeUnit.SECONDS)
 //                .addNetworkInterceptor(authorizationInterceptor)
                 .build();
         mRetrofit = new Retrofit.Builder()
@@ -60,12 +65,17 @@ public class BaseOperate {
         return baseOperateImp;
     }
 
+    public BaseOperateImp getOperate() {
+        BaseOperateImp baseOperateImp = mRetrofit.create(BaseOperateImp.class);
+        return baseOperateImp;
+    }
+
     class LoggingInterceptor implements Interceptor {
 
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
-            Log.i("BaseOperate", "BaseOperate:" + request.url() + "");
+            Log.i(TAG, "BaseOperate:" + request.url() + "");
 //            chain.connection();
             //加验证头
 //            Request.Builder requestBuilder = originalRequest.newBuilder()
@@ -74,6 +84,7 @@ public class BaseOperate {
 //                    .header("Accept", "application/json")
 //                    .method(originalRequest.method(), originalRequest.body());
             Response response = chain.proceed(request);
+//            Log.i(TAG, "BaseOperate:" + response.body().string() + "");
 //设置缓存
 //            Response.Builder responseBuilder =
 //                    //Cache control设置缓存

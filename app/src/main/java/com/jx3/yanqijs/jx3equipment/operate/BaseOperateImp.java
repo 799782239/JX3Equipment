@@ -1,11 +1,8 @@
-package com.jx3.yanqijs.jx3equipment;
+package com.jx3.yanqijs.jx3equipment.operate;
 
-import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
+import com.jx3.yanqijs.jx3equipment.model.BaseArrayOperateModel;
 import com.jx3.yanqijs.jx3equipment.model.M;
 
-import java.util.List;
-
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -19,5 +16,5 @@ public interface BaseOperateImp {
     Observable<M> getTest(@Query("skuIds") String sk, @Query("type") String type);
 
     @GET("phptest/EquipmentList.php")
-    Observable<BaseEquipmentModel> getListData(@Query("part") String part, @Query("min") String min, @Query("max") String max);
+    Observable<BaseArrayOperateModel> getListData(@Query("part") String part, @Query("min") String min, @Query("max") String max);
 }

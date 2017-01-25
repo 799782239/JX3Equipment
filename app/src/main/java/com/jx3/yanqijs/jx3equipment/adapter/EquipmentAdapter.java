@@ -19,7 +19,8 @@ public class EquipmentAdapter extends BaseRecyclerAdapter<BaseEquipmentModel> {
     public void init(BaseRecyclerHelper helper, int position, BaseEquipmentModel item) {
         helper.setText(R.id.text_name, item.equipmentName);
         helper.setText(R.id.text_stand, item.stand);
-        helper.setText(R.id.text_quality_rank, item.qualityRank + "");
+        String temp = String.format("%.0f", item.qualityRank);
+        helper.setText(R.id.text_quality_rank, temp);
         helper.setText(R.id.from, item.from);
     }
 
