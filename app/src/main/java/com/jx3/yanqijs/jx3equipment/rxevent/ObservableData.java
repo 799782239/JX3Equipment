@@ -4,10 +4,10 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.jx3.yanqijs.jx3equipment.activity.BaseActivity;
-import com.jx3.yanqijs.jx3equipment.model.BaseArrayOperateModel;
+import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
+import com.jx3.yanqijs.jx3equipment.model.BaseResponseModel;
 import com.jx3.yanqijs.jx3equipment.model.M;
 import com.jx3.yanqijs.jx3equipment.operate.BaseOperate;
 import com.jx3.yanqijs.jx3equipment.operate.BaseOperateImp;
@@ -33,7 +33,6 @@ public class ObservableData implements ObservableContract {
 
     public static class DefaultSub extends Subscriber<Object> {
         private Context mContext;
-        public JsonArray mArrayObj;
         public JsonObject mObj;
 
         public DefaultSub(Context context) {
@@ -53,9 +52,9 @@ public class ObservableData implements ObservableContract {
 
         @Override
         public void onNext(Object obj) {
-            BaseArrayOperateModel arrayDatas = null;
-            if (obj instanceof BaseArrayOperateModel) {
-                arrayDatas = (BaseArrayOperateModel) obj;
+            BaseResponseModel arrayDatas = null;
+            if (obj instanceof BaseResponseModel) {
+                arrayDatas = (BaseResponseModel) obj;
             }
             ((BaseActivity) mContext).CloseLoadingProgress();
 
@@ -63,13 +62,74 @@ public class ObservableData implements ObservableContract {
                 Toast.makeText(mContext, arrayDatas.errorMessage + "", Toast.LENGTH_SHORT).show();
                 return;
             }
-            mArrayObj = arrayDatas.data;
+//            mArrayObj = (T) arrayDatas.data;
         }
 
         @Override
         public void onStart() {
             super.onStart();
             ((BaseActivity) mContext).ShowLoadingProgress();
+        }
+    }
+
+    protected <T> Observable.Transformer<BaseResponseModel<T>, T> applySchedulers() {
+        return (Observable.Transformer<BaseResponseModel<T>, T>) transformer;
+    }
+
+    Observable.Transformer transformer = new Observable.Transformer() {
+        @Override
+        public Object call(Object o) {
+            return flatResponse((BaseResponseModel<Object>) o);
+        }
+    };
+
+    /**
+     * 对网络接口返回的Response进行分割操作
+     *
+     * @param response
+     * @param <T>
+     * @return
+     */
+    public <T> Observable<T> flatResponse(final BaseResponseModel<T> response) {
+        return Observable.create(new Observable.OnSubscribe<T>() {
+
+            @Override
+            public void call(Subscriber<? super T> subscriber) {
+                if (response.isSuccess()) {
+                    if (!subscriber.isUnsubscribed()) {
+                        subscriber.onNext(response.data);
+                    }
+                } else {
+                    if (!subscriber.isUnsubscribed()) {
+                        subscriber.onError(new APIException(response.errorCode, response.errorMessage));
+                    }
+                    return;
+                }
+
+                if (!subscriber.isUnsubscribed()) {
+                    subscriber.onCompleted();
+                }
+
+            }
+        });
+    }
+
+    /**
+     * 自定义异常，当接口返回的{@link Response#code}不为{@link Constant#OK}时，需要跑出此异常
+     * eg：登陆时验证码错误；参数为传递等
+     */
+    public static class APIException extends Exception {
+        public String code;
+        public String message;
+
+        public APIException(String code, String message) {
+            this.code = code;
+            this.message = message;
+        }
+
+        @Override
+        public String getMessage() {
+            return message;
         }
     }
 
@@ -86,7 +146,8 @@ public class ObservableData implements ObservableContract {
     }
 
     @Override
-    public Observable<BaseArrayOperateModel> getListData(String part, String min, String max) {
-        return BaseOperate.getInstance().getOperate().getListData(part, min, max);
+    public Observable<BaseEquipmentModel> getListData(String part, String min, String max) {
+        return BaseOperate.getInstance().getOperate().getListData(part, min, max)
+                .compose(this.<Object>applySchedulers());
     }
 }

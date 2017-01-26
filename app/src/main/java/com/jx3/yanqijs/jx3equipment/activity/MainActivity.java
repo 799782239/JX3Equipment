@@ -22,7 +22,7 @@ import com.jx3.yanqijs.jx3equipment.data.InitEquipmentData;
 import com.jx3.yanqijs.jx3equipment.data.ResultData;
 import com.jx3.yanqijs.jx3equipment.imp.RecyclerImp;
 import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
-import com.jx3.yanqijs.jx3equipment.model.BaseArrayOperateModel;
+import com.jx3.yanqijs.jx3equipment.model.BaseResponseModel;
 import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.ShowModel;
 import com.jx3.yanqijs.jx3equipment.rxevent.ObservableData;
@@ -122,7 +122,7 @@ public class MainActivity extends BaseActivity {
                             }
 
                             @Override
-                            public void onNext(BaseArrayOperateModel obj) {
+                            public void onNext(BaseEquipmentModel obj) {
                                 super.onNext(obj);
                                 List<BaseEquipmentModel> baseEquipmentModels = new Gson().fromJson(mObj.toString(), new TypeToken<List<BaseEquipmentModel>>() {
                                 }.getType());
