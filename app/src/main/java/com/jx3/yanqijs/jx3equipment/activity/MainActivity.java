@@ -27,6 +27,7 @@ import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.ShowModel;
 import com.jx3.yanqijs.jx3equipment.rxevent.ObservableData;
 import com.jx3.yanqijs.jx3equipment.rxevent.ShowResultEvent;
+import com.jx3.yanqijs.jx3equipment.utils.DefaultSubscriber;
 import com.jx3.yanqijs.jx3equipment.utils.RxBus;
 
 import java.util.ArrayList;
@@ -112,23 +113,17 @@ public class MainActivity extends BaseActivity {
             case R.id.btn_head:
                 mEquipmentAdapter.removeAll();
 //                mEquipmentAdapter.addAll(get("帽子"));
-                ObservableData.getInstance().getListData("arm", "11", "30")
+                ObservableData.getInstance().getData("arm", "10", "30")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new ObservableData.DefaultSub(mContext) {
+                        .subscribe(new DefaultSubscriber<List<BaseEquipmentModel>>(this) {
                             @Override
-                            public void onStart() {
-                                super.onStart();
-                            }
-
-                            @Override
-                            public void onNext(BaseEquipmentModel obj) {
+                            public void onNext(List<BaseEquipmentModel> obj) {
                                 super.onNext(obj);
-                                List<BaseEquipmentModel> baseEquipmentModels = new Gson().fromJson(mObj.toString(), new TypeToken<List<BaseEquipmentModel>>() {
-                                }.getType());
-                                mEquipmentAdapter.addAll(baseEquipmentModels);
+                                mEquipmentAdapter.addAll(obj);
                             }
-                        });
+                        })
+                ;
                 break;
             case R.id.btn_cloth:
                 mEquipmentAdapter.removeAll();

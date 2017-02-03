@@ -2,7 +2,6 @@ package com.jx3.yanqijs.jx3equipment.rxevent;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.jx3.yanqijs.jx3equipment.activity.BaseActivity;
@@ -12,8 +11,12 @@ import com.jx3.yanqijs.jx3equipment.model.M;
 import com.jx3.yanqijs.jx3equipment.operate.BaseOperate;
 import com.jx3.yanqijs.jx3equipment.operate.BaseOperateImp;
 
+import java.util.List;
+
 import rx.Observable;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -52,17 +55,7 @@ public class ObservableData implements ObservableContract {
 
         @Override
         public void onNext(Object obj) {
-            BaseResponseModel arrayDatas = null;
-            if (obj instanceof BaseResponseModel) {
-                arrayDatas = (BaseResponseModel) obj;
-            }
             ((BaseActivity) mContext).CloseLoadingProgress();
-
-            if (!arrayDatas.errorCode.equals("0")) {
-                Toast.makeText(mContext, arrayDatas.errorMessage + "", Toast.LENGTH_SHORT).show();
-                return;
-            }
-//            mArrayObj = (T) arrayDatas.data;
         }
 
         @Override
@@ -73,13 +66,21 @@ public class ObservableData implements ObservableContract {
     }
 
     protected <T> Observable.Transformer<BaseResponseModel<T>, T> applySchedulers() {
+//        return (Observable.Transformer<BaseResponseModel<T>, T>) transformer;
         return (Observable.Transformer<BaseResponseModel<T>, T>) transformer;
     }
 
     Observable.Transformer transformer = new Observable.Transformer() {
         @Override
-        public Object call(Object o) {
-            return flatResponse((BaseResponseModel<Object>) o);
+        public Object call(Object observable) {
+            return ((Observable) observable).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .flatMap(new Func1() {
+                        @Override
+                        public Object call(Object o) {
+                            return flatResponse((BaseResponseModel<Object>) o);
+                        }
+                    });
         }
     };
 
@@ -146,8 +147,8 @@ public class ObservableData implements ObservableContract {
     }
 
     @Override
-    public Observable<BaseEquipmentModel> getListData(String part, String min, String max) {
+    public Observable<List<BaseEquipmentModel>> getData(String part, String min, String max) {
         return BaseOperate.getInstance().getOperate().getListData(part, min, max)
-                .compose(this.<Object>applySchedulers());
+                .compose(this.<List<BaseEquipmentModel>>applySchedulers());
     }
 }
