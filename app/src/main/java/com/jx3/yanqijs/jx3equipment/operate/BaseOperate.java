@@ -6,6 +6,8 @@ import com.jx3.yanqijs.jx3equipment.BaseApplication;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -70,12 +72,27 @@ public class BaseOperate {
         return baseOperateImp;
     }
 
-    class LoggingInterceptor implements Interceptor {
+    /**
+     * 加入通用参数
+     *
+     * @return
+     */
+    private String getBaseParams() {
+        StringBuffer str = new StringBuffer();
+        str.append("&udid" + "123");
+        return str.toString();
+    }
+
+    private class LoggingInterceptor implements Interceptor {
 
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
             Log.i(TAG, "BaseOperate:" + request.url() + "");
+            Request newRequest = new Request.Builder()
+                    .url(request.url() + getBaseParams())
+                    .headers(request.headers())
+                    .build();
 //            chain.connection();
             //加验证头
 //            Request.Builder requestBuilder = originalRequest.newBuilder()
@@ -83,7 +100,8 @@ public class BaseOperate {
 //                    .header("Authorization", basic)
 //                    .header("Accept", "application/json")
 //                    .method(originalRequest.method(), originalRequest.body());
-            Response response = chain.proceed(request);
+            Log.i(TAG, "BaseOperate:" + newRequest.url() + "");
+            Response response = chain.proceed(newRequest);
 //            Log.i(TAG, "BaseOperate:" + response.body().string() + "");
 //设置缓存
 //            Response.Builder responseBuilder =

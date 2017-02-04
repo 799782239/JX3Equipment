@@ -11,7 +11,9 @@ import com.jx3.yanqijs.jx3equipment.model.M;
 import com.jx3.yanqijs.jx3equipment.operate.BaseOperate;
 import com.jx3.yanqijs.jx3equipment.operate.BaseOperateImp;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -145,6 +147,7 @@ public class ObservableData implements ObservableContract {
 //            }
 //        });
     }
+
 
     @Override
     public Observable<List<BaseEquipmentModel>> getData(String part, String min, String max) {
