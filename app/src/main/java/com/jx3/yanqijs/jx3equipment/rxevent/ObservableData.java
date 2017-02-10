@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import com.jx3.yanqijs.jx3equipment.activity.BaseActivity;
 import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.BaseResponseModel;
+import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.M;
 import com.jx3.yanqijs.jx3equipment.operate.BaseOperate;
 import com.jx3.yanqijs.jx3equipment.operate.BaseOperateImp;
@@ -18,6 +19,7 @@ import java.util.Map;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
@@ -34,37 +36,6 @@ public class ObservableData implements ObservableContract {
             mData = new ObservableData();
         }
         return mData;
-    }
-
-    public static class DefaultSub extends Subscriber<Object> {
-        private Context mContext;
-        public JsonObject mObj;
-
-        public DefaultSub(Context context) {
-            this.mContext = context;
-        }
-
-        @Override
-        public void onCompleted() {
-
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            Log.i("BaseOperateError", e.toString());
-            ((BaseActivity) mContext).CloseLoadingProgress();
-        }
-
-        @Override
-        public void onNext(Object obj) {
-            ((BaseActivity) mContext).CloseLoadingProgress();
-        }
-
-        @Override
-        public void onStart() {
-            super.onStart();
-            ((BaseActivity) mContext).ShowLoadingProgress();
-        }
     }
 
     protected <T> Observable.Transformer<BaseResponseModel<T>, T> applySchedulers() {
@@ -114,6 +85,7 @@ public class ObservableData implements ObservableContract {
                 }
 
             }
+
         });
     }
 
@@ -152,6 +124,16 @@ public class ObservableData implements ObservableContract {
     @Override
     public Observable<List<BaseEquipmentModel>> getData(String part, String min, String max) {
         return BaseOperate.getInstance().getOperate().getListData(part, min, max)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .compose(this.<List<BaseEquipmentModel>>applySchedulers());
+    }
+
+    @Override
+    public Observable<GeneralEquipmentModel> getEquipmentData(String pid) {
+        return BaseOperate.getInstance().getOperate().getEquipmentData(pid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<GeneralEquipmentModel>applySchedulers());
     }
 }

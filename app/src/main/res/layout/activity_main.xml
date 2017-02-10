@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/com.jx3.yanqijs.jx3equipment"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -11,24 +12,26 @@
         android:layout_margin="16dp"
         android:orientation="vertical">
 
-        <TextView
+        <com.jx3.yanqijs.jx3equipment.view.EquipmentView
             android:id="@+id/btn_head"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@mipmap/icon"
-            android:ellipsize="end" />
+            android:ellipsize="end"
+            app:hide_name="arm" />
 
-        <TextView
+        <com.jx3.yanqijs.jx3equipment.view.EquipmentView
             android:id="@+id/btn_cloth"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_weight="1"
             android:background="@color/colorAccent"
-            android:ellipsize="end" />
+            android:ellipsize="end"
+            app:hide_name="arm" />
 
-        <TextView
+        <com.jx3.yanqijs.jx3equipment.view.EquipmentView
             android:id="@+id/btn_belt"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -37,7 +40,7 @@
             android:background="@color/colorAccent"
             android:ellipsize="end" />
 
-        <TextView
+        <com.jx3.yanqijs.jx3equipment.view.EquipmentView
             android:id="@+id/btn_arms"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -46,7 +49,7 @@
             android:background="@color/colorAccent"
             android:ellipsize="end" />
 
-        <TextView
+        <com.jx3.yanqijs.jx3equipment.view.EquipmentView
             android:id="@+id/btn_hidden_arms"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -64,14 +67,14 @@
         android:layout_margin="16dp"
         android:orientation="vertical">
 
-        <TextView
+        <com.jx3.yanqijs.jx3equipment.view.EquipmentView
             android:id="@+id/btn_hand"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@mipmap/icon" />
 
-        <TextView
+        <com.jx3.yanqijs.jx3equipment.view.EquipmentView
             android:id="@+id/btn_pants"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -79,7 +82,7 @@
             android:layout_weight="1"
             android:background="@color/colorAccent" />
 
-        <TextView
+        <com.jx3.yanqijs.jx3equipment.view.EquipmentView
             android:id="@+id/btn_shoe"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -87,7 +90,7 @@
             android:layout_weight="1"
             android:background="@color/colorAccent" />
 
-        <TextView
+        <com.jx3.yanqijs.jx3equipment.view.EquipmentView
             android:id="@+id/btn_necklace"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -95,7 +98,7 @@
             android:layout_weight="1"
             android:background="@color/colorAccent" />
 
-        <TextView
+        <com.jx3.yanqijs.jx3equipment.view.EquipmentView
             android:id="@+id/btn_trinketry"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -103,7 +106,7 @@
             android:layout_weight="1"
             android:background="@color/colorAccent" />
 
-        <TextView
+        <com.jx3.yanqijs.jx3equipment.view.EquipmentView
             android:id="@+id/btn_ring_1"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -111,7 +114,7 @@
             android:layout_weight="1"
             android:background="@color/colorAccent" />
 
-        <TextView
+        <com.jx3.yanqijs.jx3equipment.view.EquipmentView
             android:id="@+id/btn_ring_2"
             android:layout_width="50dp"
             android:layout_height="wrap_content"

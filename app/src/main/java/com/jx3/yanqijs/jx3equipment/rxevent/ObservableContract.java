@@ -1,6 +1,7 @@
 package com.jx3.yanqijs.jx3equipment.rxevent;
 
 import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
+import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.M;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface ObservableContract {
     Observable<M> getJdId(String id, String type);
 
     Observable<List<BaseEquipmentModel>> getData(String part, String min, String max);
+
+    Observable<GeneralEquipmentModel> getEquipmentData(String pid);
 }

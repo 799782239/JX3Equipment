@@ -1,4 +1,4 @@
-package com.jx3.yanqijs.jx3equipment.rxevent;
+package com.jx3.yanqijs.jx3equipment.event;
 
 import com.jx3.yanqijs.jx3equipment.data.ResultData;
 import com.jx3.yanqijs.jx3equipment.model.ShowModel;

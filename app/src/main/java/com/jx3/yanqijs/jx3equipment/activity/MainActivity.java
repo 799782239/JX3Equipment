@@ -12,8 +12,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jx3.yanqijs.jx3equipment.R;
 import com.jx3.yanqijs.jx3equipment.adapter.EquipmentAdapter;
 import com.jx3.yanqijs.jx3equipment.adapter.GeneralEquipmentAdapter;
@@ -22,13 +20,13 @@ import com.jx3.yanqijs.jx3equipment.data.InitEquipmentData;
 import com.jx3.yanqijs.jx3equipment.data.ResultData;
 import com.jx3.yanqijs.jx3equipment.imp.RecyclerImp;
 import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
-import com.jx3.yanqijs.jx3equipment.model.BaseResponseModel;
 import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.ShowModel;
 import com.jx3.yanqijs.jx3equipment.rxevent.ObservableData;
-import com.jx3.yanqijs.jx3equipment.rxevent.ShowResultEvent;
+import com.jx3.yanqijs.jx3equipment.event.ShowResultEvent;
 import com.jx3.yanqijs.jx3equipment.utils.DefaultSubscriber;
 import com.jx3.yanqijs.jx3equipment.utils.RxBus;
+import com.jx3.yanqijs.jx3equipment.view.EquipmentView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,11 +81,20 @@ public class MainActivity extends BaseActivity {
             @Override
             public void OnItemClick(View view, int position) {
                 closeChoose();
-                GeneralEquipmentModel generalEquipmentModel = InitEquipmentData.getInstance().find(mEquipmentAdapter.getData(position).pId);
-                ResultData.getInstance().add(generalEquipmentModel);
-                ResultData.getInstance().calculateTotal();
-                showData.clear();
-                RxBus.getInstance().post(new ShowResultEvent(ResultData.getInstance().toShow()));
+                ObservableData.getInstance().getEquipmentData(mEquipmentAdapter.getData(position).pId + "")
+                        .subscribe(new DefaultSubscriber<GeneralEquipmentModel>(mContext) {
+                            @Override
+                            public void onNext(GeneralEquipmentModel obj) {
+                                super.onNext(obj);
+                                ResultData.getInstance().add(obj);
+                                ResultData.getInstance().calculateTotal();
+                                showData.clear();
+                                RxBus.getInstance().post(new ShowResultEvent(ResultData.getInstance().toShow()));
+                            }
+                        });
+//                GeneralEquipmentModel generalEquipmentModel = InitEquipmentData.getInstance().find(mEquipmentAdapter.getData(position).pId);
+//                ResultData.getInstance().add(generalEquipmentModel);
+
             }
         });
         chooseRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
@@ -104,7 +111,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick({R.id.btn_head, R.id.btn_cloth, R.id.btn_arms, R.id.btn_belt, R.id.btn_hand, R.id.btn_hidden_arms
             , R.id.btn_necklace, R.id.btn_pants, R.id.btn_shoe, R.id.btn_ring_1, R.id.btn_ring_2, R.id.btn_trinketry})
-    public void sumbit(TextView view) {
+    public void sumbit(EquipmentView view) {
         shadowRelativeLayout.setVisibility(View.VISIBLE);
         ObjectAnimator chooseRecyclerAnimator = ObjectAnimator.ofFloat(shadowRelativeLayout, "alpha", 0f, 1f);
         ObjectAnimator chooseInAnimator = ObjectAnimator.ofFloat(chooseRecyclerView, "translationY", -1000, 0);
@@ -113,17 +120,14 @@ public class MainActivity extends BaseActivity {
             case R.id.btn_head:
                 mEquipmentAdapter.removeAll();
 //                mEquipmentAdapter.addAll(get("帽子"));
-                ObservableData.getInstance().getData("arm", "10", "30")
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
+                ObservableData.getInstance().getData(view.hideName, "10", "30")
                         .subscribe(new DefaultSubscriber<List<BaseEquipmentModel>>(this) {
                             @Override
                             public void onNext(List<BaseEquipmentModel> obj) {
                                 super.onNext(obj);
                                 mEquipmentAdapter.addAll(obj);
                             }
-                        })
-                ;
+                        });
                 break;
             case R.id.btn_cloth:
                 mEquipmentAdapter.removeAll();
