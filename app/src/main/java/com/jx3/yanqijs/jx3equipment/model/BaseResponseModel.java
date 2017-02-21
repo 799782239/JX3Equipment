@@ -2,6 +2,8 @@ package com.jx3.yanqijs.jx3equipment.model;
 
 /**
  * Created by yanqijs on 2017/1/25.
+ *
+ * @param <T> 数据请求返回的数据结构
  */
 
 public class BaseResponseModel<T> {

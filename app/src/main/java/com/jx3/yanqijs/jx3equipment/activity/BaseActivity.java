@@ -42,6 +42,7 @@ public abstract class BaseActivity extends Activity {
         if (mSubscriptions != null) {
             mSubscriptions.clear();
         }
+        mSubscriptions.unsubscribe();
     }
 
     protected Subscription subscribeEvents() {

@@ -109,20 +109,20 @@ public class BaseOperate {
 //                    .method(originalRequest.method(), originalRequest.body());
             Log.i(TAG, "BaseOperate:" + newRequest.url() + "");
             Response response = chain.proceed(newRequest);
-            if (response.isSuccessful()) {
-                return response;
-            } else {
-                BaseResponseModel<Object> body = new BaseResponseModel<>();
-                body.errorCode = "-1";
-                body.errorMessage = "网络问题";
-                body.data = "";
-                Gson gson = new Gson();
-                Response newResponse = new Response.Builder()
-                        .headers(response.headers())
-                        .message(gson.toJson(body, BaseResponseModel.class))
-                        .build();
-                return newResponse;
-            }
+//            if (response.isSuccessful()) {
+            return response;
+//            } else {
+//                BaseResponseModel<Object> body = new BaseResponseModel<>();
+//                body.errorCode = "-1";
+//                body.errorMessage = "网络问题";
+//                body.data = "1";
+//                Gson gson = new Gson();
+//                Response newResponse = new Response.Builder()
+//                        .headers(response.headers())
+//                        .message(gson.toJson(body, BaseResponseModel.class))
+//                        .build();
+//                return newResponse;
+//            }
 //            Log.i(TAG, "BaseOperate:" + response.body().string() + "");
 //设置缓存
 //            Response.Builder responseBuilder =

@@ -58,7 +58,8 @@ public class ObservableData implements ObservableContract {
     };
 
     /**
-     * 对网络接口返回的Response进行分割操作
+     * 对网络接口返回的Response进行分割操作{@link BaseResponseModel<T>},{@link BaseResponseModel#errorCode}为错误码，
+     * {@link BaseResponseModel#errorMessage}为错误信息，{@link BaseResponseModel#data}为需要的数据。
      *
      * @param response
      * @param <T>
@@ -90,7 +91,7 @@ public class ObservableData implements ObservableContract {
     }
 
     /**
-     * 自定义异常，当接口返回的{@link Response#code}不为{@link Constant#OK}时，需要跑出此异常
+     * 自定义异常，当接口返回的{@link BaseResponseModel#errorCode}不为{1}时，需要跑出此异常
      * eg：登陆时验证码错误；参数为传递等
      */
     public static class APIException extends Exception {
@@ -124,16 +125,12 @@ public class ObservableData implements ObservableContract {
     @Override
     public Observable<List<BaseEquipmentModel>> getData(String part, String min, String max) {
         return BaseOperate.getInstance().getOperate().getListData(part, min, max)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .compose(this.<List<BaseEquipmentModel>>applySchedulers());
     }
 
     @Override
     public Observable<GeneralEquipmentModel> getEquipmentData(String pid) {
         return BaseOperate.getInstance().getOperate().getEquipmentData(pid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .compose(this.<GeneralEquipmentModel>applySchedulers());
     }
 }

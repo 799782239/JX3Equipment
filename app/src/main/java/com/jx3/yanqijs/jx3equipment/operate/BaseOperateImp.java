@@ -19,10 +19,13 @@ import rx.Observable;
 
 public interface BaseOperateImp {
     @GET("phptest/asd.php")
-    Observable<M> getTest(@Query("skuIds") String sk, @Query("type") String type);
+    Observable<M> getTest(@Query("skuIds") String sk,
+                          @Query("type") String type);
 
     @GET("phptest/equipment_list.php")
-    Observable<BaseResponseModel<List<BaseEquipmentModel>>> getListData(@Query("part") String part, @Query("min") String min, @Query("max") String max);
+    Observable<BaseResponseModel<List<BaseEquipmentModel>>> getListData(@Query("part") String part,
+                                                                        @Query("min") String min,
+                                                                        @Query("max") String max);
 
     @GET("phptest/equipment_search.php")
     Observable<BaseResponseModel<GeneralEquipmentModel>> getEquipmentData(@Query("pid") String pid);

@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void OnItemClick(View view, int position) {
                 closeChoose();
-                ObservableData.getInstance().getEquipmentData(mEquipmentAdapter.getData(position).pId + "")
+                Subscription subscription = ObservableData.getInstance().getEquipmentData(mEquipmentAdapter.getData(position).pId + "")
                         .subscribe(new DefaultSubscriber<GeneralEquipmentModel>(mContext) {
                             @Override
                             public void onNext(GeneralEquipmentModel obj) {
@@ -92,6 +92,7 @@ public class MainActivity extends BaseActivity {
                                 RxBus.getInstance().post(new ShowResultEvent(ResultData.getInstance().toShow()));
                             }
                         });
+                addSubscription(subscription);
 //                GeneralEquipmentModel generalEquipmentModel = InitEquipmentData.getInstance().find(mEquipmentAdapter.getData(position).pId);
 //                ResultData.getInstance().add(generalEquipmentModel);
 
