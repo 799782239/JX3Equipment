@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.jx3.yanqijs.jx3equipment.BaseApplication;
 import com.jx3.yanqijs.jx3equipment.model.BaseResponseModel;
+import com.jx3.yanqijs.jx3equipment.utils.Constant;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class BaseOperate {
 //                .addNetworkInterceptor(authorizationInterceptor)
                 .build();
         mRetrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.191.1/")
+                .baseUrl(Constant.BASE_URL)
                 .client(mOkHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -97,7 +98,7 @@ public class BaseOperate {
             Request request = chain.request();
             Log.i(TAG, "BaseOperate:" + request.url() + "");
             Request newRequest = new Request.Builder()
-                    .url(request.url() + getBaseParams())
+                    .url(request.url() + getBaseParams() + "&part=arm")
                     .headers(request.headers())
                     .build();
 //            chain.connection();

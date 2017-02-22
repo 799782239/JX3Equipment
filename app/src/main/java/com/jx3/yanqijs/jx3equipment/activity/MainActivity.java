@@ -91,6 +91,11 @@ public class MainActivity extends BaseActivity {
                                 showData.clear();
                                 RxBus.getInstance().post(new ShowResultEvent(ResultData.getInstance().toShow()));
                             }
+
+                            @Override
+                            public boolean setShowLoading() {
+                                return false;
+                            }
                         });
                 addSubscription(subscription);
 //                GeneralEquipmentModel generalEquipmentModel = InitEquipmentData.getInstance().find(mEquipmentAdapter.getData(position).pId);
@@ -127,6 +132,11 @@ public class MainActivity extends BaseActivity {
                             public void onNext(List<BaseEquipmentModel> obj) {
                                 super.onNext(obj);
                                 mEquipmentAdapter.addAll(obj);
+                            }
+
+                            @Override
+                            public boolean setShowLoading() {
+                                return false;
                             }
                         });
                 break;

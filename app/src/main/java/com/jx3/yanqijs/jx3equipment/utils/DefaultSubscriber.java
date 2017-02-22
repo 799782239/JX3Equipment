@@ -19,46 +19,59 @@ import rx.Subscriber;
 
 public class DefaultSubscriber<T> extends Subscriber<T> {
     private Context mContext;
+    private String text;
 
     public DefaultSubscriber(Context mContext) {
         this.mContext = mContext;
     }
 
+    public boolean setShowToast() {
+        return true;
+    }
+
+    public boolean setShowLoading() {
+        return true;
+    }
+
     @Override
     public void onCompleted() {
-        ((BaseActivity) mContext).CloseLoadingProgress();
+        if (setShowLoading())
+            ((BaseActivity) mContext).CloseLoadingProgress();
     }
 
     @Override
     public void onError(Throwable e) {
         Log.i("BaseOperateError", e.toString());
         if (e instanceof ConnectException) {
-            Toast.makeText(mContext, "请检查是否联网", Toast.LENGTH_SHORT).show();
+            text = "请检查是否联网";
         } else if (e instanceof HttpException) {
             HttpException httpException = (HttpException) e;
             try {
-                String errorBody = httpException.response().errorBody().string();
-                //TODO: parse To JSON Obj
-
+                text = httpException.response().errorBody().string();
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         } else if (e instanceof SocketTimeoutException) {
-            Toast.makeText(mContext, "访问超时", Toast.LENGTH_SHORT).show();
+            text = "访问超时";
         } else {
-            Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+            text = e.getMessage();
         }
-        ((BaseActivity) mContext).CloseLoadingProgress();
+        if (setShowLoading())
+            ((BaseActivity) mContext).CloseLoadingProgress();
+        if (setShowToast())
+            BaseToast.getInstance(mContext).showToast(text);
     }
 
     @Override
     public void onNext(T obj) {
-        ((BaseActivity) mContext).CloseLoadingProgress();
+        if (setShowLoading())
+            ((BaseActivity) mContext).CloseLoadingProgress();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        ((BaseActivity) mContext).ShowLoadingProgress();
+        if (setShowLoading())
+            ((BaseActivity) mContext).ShowLoadingProgress();
     }
 }
