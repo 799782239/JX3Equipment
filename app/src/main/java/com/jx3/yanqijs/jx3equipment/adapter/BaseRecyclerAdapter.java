@@ -36,6 +36,17 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
 
     protected RecyclerImp onRecyclerImp;
 
+    /**
+     * 构造方法不希望用户直接操作adapter中data数据,防止发生data被多个对象引用，要添加数据可通过{@link #add(Object),#addAll(List)}
+     *
+     * @param context
+     * @param onRecyclerImp
+     */
+    public BaseRecyclerAdapter(Context context, RecyclerImp onRecyclerImp) {
+        this.mDatas = new ArrayList<>();
+        this.context = context;
+        this.onRecyclerImp = onRecyclerImp;
+    }
 
     @Override
     public BaseRecyclerHelper onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,7 +60,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
                 break;
         }
         return mViewHolder;
-
+//        return super.onCreateViewHolder(parent, viewType);
     }
 
     @Override
@@ -65,7 +76,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
 
     @Override
     public int getItemViewType(int position) {
-        if (position > mDatas.size() - 1) {
+        if (position > mDatas.size() - mHeader.size()) {
             return 1;
         }
         return super.getItemViewType(position);
@@ -73,22 +84,9 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
 
     @Override
     public int getItemCount() {
-        if (isFooter) {
-            return mDatas.size() + mFooter.size();
-        }
+//        super.getItemCount();
+//        return mDatas.size()+super.getItemCount();
         return mDatas.size();
-    }
-
-    /**
-     * 构造方法不希望用户直接操作adapter中data数据,防止发生data被多个对象引用，要添加数据可通过{@link #add(Object),#addAll(List)}
-     *
-     * @param context
-     * @param onRecyclerImp
-     */
-    public BaseRecyclerAdapter(Context context, RecyclerImp onRecyclerImp) {
-        this.mDatas = new ArrayList<>();
-        this.context = context;
-        this.onRecyclerImp = onRecyclerImp;
     }
 
     //--------------------添加数据-------------------------

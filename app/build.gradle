@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "24.0.2"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.jx3.yanqijs.jx3equipment"
         minSdkVersion 19
@@ -34,4 +34,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile files('libs/tbs_sdk.jar')
+
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.3'
 }

@@ -1,11 +1,15 @@
 package com.jx3.yanqijs.jx3equipment.operate;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.jx3.yanqijs.jx3equipment.BaseApplication;
 import com.jx3.yanqijs.jx3equipment.model.BaseResponseModel;
 import com.jx3.yanqijs.jx3equipment.utils.Constant;
+import com.jx3.yanqijs.jx3equipment.utils.WebStatusUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BaseOperate {
     private final static String TAG = "BaseOperate";
-    private int connectTime = 30;
+    private int connectTime = 30;//超时时间
 
     public BaseOperate() {
         LoggingInterceptor interceptor = new LoggingInterceptor();
@@ -39,6 +43,7 @@ public class BaseOperate {
                 .addInterceptor(interceptor)
                 .retryOnConnectionFailure(true)
                 .connectTimeout(connectTime, TimeUnit.SECONDS)
+                .cache(cache())
 //                .addNetworkInterceptor(authorizationInterceptor)
                 .build();
         mRetrofit = new Retrofit.Builder()
@@ -49,8 +54,13 @@ public class BaseOperate {
                 .build();
     }
 
+    /**
+     * 设置缓存
+     *
+     * @return
+     */
     private Cache cache() {
-        final File baseDir = BaseApplication.getInstance().getExternalCacheDir();
+        final File baseDir = new File(BaseApplication.getInstance().getExternalCacheDir(), "response");
         return new Cache(baseDir, 10 * 1024 * 1024);
     }
 
@@ -84,7 +94,7 @@ public class BaseOperate {
      */
     private String getBaseParams() {
         StringBuffer str = new StringBuffer();
-        str.append("&udid" + "123");
+        str.append("&udid=" + "123");
         return str.toString();
     }
 
@@ -98,7 +108,7 @@ public class BaseOperate {
             Request request = chain.request();
             Log.i(TAG, "BaseOperate:" + request.url() + "");
             Request newRequest = new Request.Builder()
-                    .url(request.url() + getBaseParams() + "&part=arm")
+                    .url(request.url() + getBaseParams())
                     .headers(request.headers())
                     .build();
 //            chain.connection();
@@ -110,26 +120,22 @@ public class BaseOperate {
 //                    .method(originalRequest.method(), originalRequest.body());
             Log.i(TAG, "BaseOperate:" + newRequest.url() + "");
             Response response = chain.proceed(newRequest);
-//            if (response.isSuccessful()) {
+            if (WebStatusUtils.isConnectWeb()) {
+                int maxAge = 0 * 60; // 有网络时 设置缓存超时时间0个小时
+                response.newBuilder()
+                        .header("Cache-Control", "public, max-age=" + maxAge)
+                        .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
+                        .build();
+                Log.i(TAG, "response:" + response + "");
+            } else {
+                int maxStale = 60 * 60 * 24 * 28; // 无网络时，设置超时为4周
+                response.newBuilder()
+                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                        .removeHeader("Pragma")
+                        .build();
+                Log.i(TAG, "responseCache:" + response + "");
+            }
             return response;
-//            } else {
-//                BaseResponseModel<Object> body = new BaseResponseModel<>();
-//                body.errorCode = "-1";
-//                body.errorMessage = "网络问题";
-//                body.data = "1";
-//                Gson gson = new Gson();
-//                Response newResponse = new Response.Builder()
-//                        .headers(response.headers())
-//                        .message(gson.toJson(body, BaseResponseModel.class))
-//                        .build();
-//                return newResponse;
-//            }
-//            Log.i(TAG, "BaseOperate:" + response.body().string() + "");
-//设置缓存
-//            Response.Builder responseBuilder =
-//                    //Cache control设置缓存
-//                    originalResponse.newBuilder().header("Cache-Control", cacheControl);
-//            return response;
         }
     }
 }
