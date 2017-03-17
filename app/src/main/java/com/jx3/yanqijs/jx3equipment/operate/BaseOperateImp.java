@@ -1,16 +1,14 @@
 package com.jx3.yanqijs.jx3equipment.operate;
 
+import com.dang.yanqijs.base.model.BaseResponseModel;
 import com.jx3.yanqijs.jx3equipment.model.BaseEquipmentModel;
-import com.jx3.yanqijs.jx3equipment.model.BaseResponseModel;
 import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.M;
 
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 import rx.Observable;
 
 /**

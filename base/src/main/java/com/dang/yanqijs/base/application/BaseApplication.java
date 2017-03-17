@@ -1,4 +1,4 @@
-package com.jx3.yanqijs.jx3equipment;
+package com.dang.yanqijs.base.application;
 
 import android.app.Application;
 

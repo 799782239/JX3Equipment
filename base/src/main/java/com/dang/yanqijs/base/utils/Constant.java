@@ -1,4 +1,4 @@
-package com.jx3.yanqijs.jx3equipment.utils;
+package com.dang.yanqijs.base.utils;
 
 /**
  * Created by yanqijs on 2017/2/22.

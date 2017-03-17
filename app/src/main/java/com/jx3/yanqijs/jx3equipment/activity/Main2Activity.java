@@ -3,18 +3,19 @@ package com.jx3.yanqijs.jx3equipment.activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
-//import android.webkit.WebChromeClient;
-//import android.webkit.WebResourceResponse;
-//import android.webkit.WebSettings;
-//import android.webkit.WebView;
-//import android.webkit.WebViewClient;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceResponse;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.jx3.yanqijs.jx3equipment.R;
-import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
-import com.tencent.smtt.sdk.WebSettings;
-import com.tencent.smtt.sdk.WebView;
-import com.tencent.smtt.sdk.WebViewClient;
+//import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
+//import com.tencent.smtt.sdk.WebChromeClient;
+//import com.tencent.smtt.sdk.WebSettings;
+//import com.tencent.smtt.sdk.WebView;
+//import com.tencent.smtt.sdk.WebViewClient;
 
 public class Main2Activity extends BaseActivity {
     private TextView textView;
@@ -41,9 +42,12 @@ public class Main2Activity extends BaseActivity {
         webSettings.setLoadsImagesAutomatically(false);
         webSettings.setCacheMode(android.webkit.WebSettings.LOAD_NO_CACHE);
         webSettings.setSupportMultipleWindows(true);
-//        mWebView.setWebChromeClient(new com.tencent.smtt.sdk.WebChromeClient() {
-//
-//        });
+        mWebView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView webView, int i) {
+                super.onProgressChanged(webView, i);
+            }
+        });
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public WebResourceResponse shouldInterceptRequest(WebView view, String url) {

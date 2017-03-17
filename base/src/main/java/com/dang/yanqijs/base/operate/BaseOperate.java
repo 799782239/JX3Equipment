@@ -1,20 +1,13 @@
-package com.jx3.yanqijs.jx3equipment.operate;
+package com.dang.yanqijs.base.operate;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.jx3.yanqijs.jx3equipment.BaseApplication;
-import com.jx3.yanqijs.jx3equipment.model.BaseResponseModel;
-import com.jx3.yanqijs.jx3equipment.utils.Constant;
-import com.jx3.yanqijs.jx3equipment.utils.WebStatusUtils;
+import com.dang.yanqijs.base.application.BaseApplication;
+import com.dang.yanqijs.base.utils.Constant;
+import com.dang.yanqijs.base.utils.WebStatusUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -22,8 +15,6 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
-import okhttp3.internal.http.RealResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -32,9 +23,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by yanqijs on 2016/12/13.
  */
 
-public class BaseOperate {
+public class BaseOperate<T> {
     private final static String TAG = "BaseOperate";
     private int connectTime = 30;//超时时间
+    public Class<T> object;
 
     public BaseOperate() {
         LoggingInterceptor interceptor = new LoggingInterceptor();
@@ -77,15 +69,15 @@ public class BaseOperate {
         return mBaseOperate;
     }
 
-    public BaseOperateImp getOperate(Class<BaseOperateImp> object) {
-        BaseOperateImp baseOperateImp = mRetrofit.create(object);
+    public T getOperate() {
+        T baseOperateImp = mRetrofit.create(object);
         return baseOperateImp;
     }
 
-    public BaseOperateImp getOperate() {
-        BaseOperateImp baseOperateImp = mRetrofit.create(BaseOperateImp.class);
-        return baseOperateImp;
-    }
+//    public BaseOperateImp getOperate() {
+//        BaseOperateImp baseOperateImp = mRetrofit.create(BaseOperateImp.class);
+//        return baseOperateImp;
+//    }
 
     /**
      * 加入通用参数

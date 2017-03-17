@@ -1,10 +1,10 @@
-package com.jx3.yanqijs.jx3equipment.utils;
+package com.dang.yanqijs.base.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.dang.yanqijs.base.application.BaseApplication;
+import com.jx3.yanqijs.jx3equipment.BaseApplication;
 
 /**
  * Created by yanqijs on 2017/3/16.
