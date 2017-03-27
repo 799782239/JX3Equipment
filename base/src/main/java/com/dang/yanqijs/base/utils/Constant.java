@@ -5,5 +5,5 @@ package com.dang.yanqijs.base.utils;
  */
 
 public class Constant {
-    public static final String BASE_URL = "http://192.168.191.1/";
+    public static final String BASE_URL = "http://p.3.cn/prices/";
 }

@@ -4,7 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.jx3.yanqijs.jx3equipment.BaseApplication;
+import com.dang.yanqijs.base.application.BaseApplication;
+
 
 /**
  * Created by yanqijs on 2017/3/16.

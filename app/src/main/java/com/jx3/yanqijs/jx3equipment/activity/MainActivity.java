@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void OnItemClick(View view, int position) {
                 closeChoose();
-                Subscription subscription = ObservableData.getInstance().getEquipmentData(mEquipmentAdapter.getData(position).pId + "")
+                Subscription subscription = new ObservableData().getEquipmentData(mEquipmentAdapter.getData(position).pId + "")
                         .subscribe(new DefaultSubscriber<GeneralEquipmentModel>(mContext) {
                             @Override
                             public void onNext(GeneralEquipmentModel obj) {
@@ -126,19 +126,19 @@ public class MainActivity extends BaseActivity {
             case R.id.btn_head:
                 mEquipmentAdapter.removeAll();
 //                mEquipmentAdapter.addAll(get("帽子"));
-                ObservableData.getInstance().getData(view.hideName, "10", "30")
-                        .subscribe(new DefaultSubscriber<List<BaseEquipmentModel>>(this) {
-                            @Override
-                            public void onNext(List<BaseEquipmentModel> obj) {
-                                super.onNext(obj);
-                                mEquipmentAdapter.addAll(obj);
-                            }
-
-                            @Override
-                            public boolean setShowLoading() {
-                                return false;
-                            }
-                        });
+//                ObservableData.getInstance().getData(view.hideName, "10", "30")
+//                        .subscribe(new DefaultSubscriber<List<BaseEquipmentModel>>(this) {
+//                            @Override
+//                            public void onNext(List<BaseEquipmentModel> obj) {
+//                                super.onNext(obj);
+//                                mEquipmentAdapter.addAll(obj);
+//                            }
+//
+//                            @Override
+//                            public boolean setShowLoading() {
+//                                return false;
+//                            }
+//                        });
                 break;
             case R.id.btn_cloth:
                 mEquipmentAdapter.removeAll();

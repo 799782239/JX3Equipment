@@ -3,7 +3,7 @@ package com.dang.yanqijs.base.utils;
 import android.content.Context;
 import android.util.Log;
 
-import com.jx3.yanqijs.jx3equipment.activity.BaseActivity;
+
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -34,8 +34,8 @@ public class DefaultSubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onCompleted() {
-        if (setShowLoading())
-            ((BaseActivity) mContext).CloseLoadingProgress();
+//        if (setShowLoading())
+//            ((BaseActivity) mContext).CloseLoadingProgress();
     }
 
     @Override
@@ -56,21 +56,21 @@ public class DefaultSubscriber<T> extends Subscriber<T> {
             text = e.getMessage();
         }
         if (setShowLoading())
-            ((BaseActivity) mContext).CloseLoadingProgress();
+//            ((BaseActivity) mContext).CloseLoadingProgress();
         if (setShowToast())
             BaseToast.getInstance(mContext).showToast(text);
     }
 
     @Override
     public void onNext(T obj) {
-        if (setShowLoading())
-            ((BaseActivity) mContext).CloseLoadingProgress();
+//        if (setShowLoading())
+//            ((BaseActivity) mContext).CloseLoadingProgress();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (setShowLoading())
-            ((BaseActivity) mContext).ShowLoadingProgress();
+//        if (setShowLoading())
+//            ((BaseActivity) mContext).ShowLoadingProgress();
     }
 }

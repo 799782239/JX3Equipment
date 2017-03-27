@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jx3.yanqijs.jx3equipment.R;
+
+import com.dang.yanqijs.base.R;
 
 import butterknife.ButterKnife;
 import rx.Subscription;

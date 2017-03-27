@@ -13,14 +13,6 @@ import rx.schedulers.Schedulers;
  */
 
 public class BaseObservableData {
-    private static BaseObservableData mData;
-
-    public static BaseObservableData getInstance() {
-        if (mData == null) {
-            mData = new BaseObservableData();
-        }
-        return mData;
-    }
 
     protected <T> Observable.Transformer<BaseResponseModel<T>, T> applySchedulers() {
 //        return (Observable.Transformer<BaseResponseModel<T>, T>) transformer;

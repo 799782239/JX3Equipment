@@ -8,6 +8,7 @@ import com.dang.yanqijs.base.operate.BaseAddImpOperate;
 
 public class Operate extends BaseAddImpOperate<BaseOperateImp> {
 
+
     @Override
     public Class<BaseOperateImp> setOperateImp() {
         return BaseOperateImp.class;

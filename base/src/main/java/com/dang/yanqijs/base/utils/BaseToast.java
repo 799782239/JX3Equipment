@@ -1,4 +1,4 @@
-package com.jx3.yanqijs.jx3equipment.utils;
+package com.dang.yanqijs.base.utils;
 
 import android.content.Context;
 import android.widget.Toast;

@@ -11,6 +11,7 @@ import com.jx3.yanqijs.jx3equipment.operate.Operate;
 import java.util.List;
 
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
@@ -23,13 +24,8 @@ public class ObservableData extends BaseObservableData implements ObservableCont
     @Override
     public Observable<M> getJdId(String id, String type) {
         BaseOperateImp baseOperateImp = new Operate().getOperate();
-        return baseOperateImp.getTest(id, type).subscribeOn(Schedulers.io());
-//                .flatMap(new Func1<List<M>, Observable<M>>() {
-//            @Override
-//            public Observable<M> call(List<M> ms) {
-//                return Observable.from(ms);
-//            }
-//        });
+        return baseOperateImp.getTest(id, type).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
 

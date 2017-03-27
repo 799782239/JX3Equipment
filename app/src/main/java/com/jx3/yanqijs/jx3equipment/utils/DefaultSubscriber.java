@@ -2,9 +2,9 @@ package com.jx3.yanqijs.jx3equipment.utils;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.jx3.yanqijs.jx3equipment.activity.BaseActivity;
+import com.dang.yanqijs.base.utils.BaseToast;
 
 import java.io.IOException;
 import java.net.ConnectException;
