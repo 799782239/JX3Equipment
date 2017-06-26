@@ -21,11 +21,17 @@ import rx.schedulers.Schedulers;
 public class ObservableData extends BaseObservableData implements ObservableContract {
 
 
+    //    @Override
+//    public Observable<M> getJdId(String id, String type) {
+//        BaseOperateImp baseOperateImp = new Operate().getOperate();
+//        return baseOperateImp.getTest(id, type).subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread());
+//    }
     @Override
-    public Observable<M> getJdId(String id, String type) {
+    public Observable<M> getJdId() {
         BaseOperateImp baseOperateImp = new Operate().getOperate();
-        return baseOperateImp.getTest(id, type).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+        return baseOperateImp.getTest().subscribeOn(Schedulers.io())
+                .compose(this.<M>applySchedulers());
     }
 
 

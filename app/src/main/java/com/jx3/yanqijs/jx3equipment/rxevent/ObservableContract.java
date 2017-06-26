@@ -14,7 +14,8 @@ import rx.Observable;
 
 public interface ObservableContract {
     //    Observable<GeneralEquipmentModel> getEquipment(int id);
-    Observable<M> getJdId(String id, String type);
+//    Observable<M> getJdId(String id, String type);
+    Observable<M> getJdId();
 
     Observable<List<BaseEquipmentModel>> getData(String part, String min, String max);
 

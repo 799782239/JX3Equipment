@@ -9,6 +9,7 @@ import java.util.List;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
@@ -18,9 +19,12 @@ import rx.Observable;
 public interface BaseOperateImp {
 
 
-    @GET("prices/mgets")
-    Observable<M> getTest(@Query("skuIds") String sk,
-                          @Query("type") String type);
+    @GET("/")
+    Observable<BaseResponseModel<M>> getTest();
+//
+//    @GET("prices/mgets")
+//    Observable<M> getTest(@Query("skuIds") String sk,
+//                          @Query("type") String type);
 
     @GET("phptest/equipment_list.php")
     Observable<BaseResponseModel<List<BaseEquipmentModel>>> getListData(@Query("part") String part,

@@ -17,11 +17,11 @@ import rx.Subscriber;
  * Created by yanqijs on 2017/2/3.
  */
 
-public class DefaultSubscriber<T> extends Subscriber<T> {
+public class MySubscriber<T> extends Subscriber<T> {
     private Context mContext;
     private String text;
 
-    public DefaultSubscriber(Context mContext) {
+    public MySubscriber(Context mContext) {
         this.mContext = mContext;
     }
 

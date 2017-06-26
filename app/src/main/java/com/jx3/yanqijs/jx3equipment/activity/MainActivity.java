@@ -24,7 +24,7 @@ import com.jx3.yanqijs.jx3equipment.model.GeneralEquipmentModel;
 import com.jx3.yanqijs.jx3equipment.model.ShowModel;
 import com.jx3.yanqijs.jx3equipment.rxevent.ObservableData;
 import com.jx3.yanqijs.jx3equipment.event.ShowResultEvent;
-import com.jx3.yanqijs.jx3equipment.utils.DefaultSubscriber;
+import com.jx3.yanqijs.jx3equipment.utils.MySubscriber;
 import com.jx3.yanqijs.jx3equipment.utils.RxBus;
 import com.jx3.yanqijs.jx3equipment.view.EquipmentView;
 
@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity {
             public void OnItemClick(View view, int position) {
                 closeChoose();
                 Subscription subscription = new ObservableData().getEquipmentData(mEquipmentAdapter.getData(position).pId + "")
-                        .subscribe(new DefaultSubscriber<GeneralEquipmentModel>(mContext) {
+                        .subscribe(new MySubscriber<GeneralEquipmentModel>(mContext) {
                             @Override
                             public void onNext(GeneralEquipmentModel obj) {
                                 super.onNext(obj);
